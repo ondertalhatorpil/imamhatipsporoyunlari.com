@@ -7,12 +7,14 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
-      - DB_HOST=mysql
+      - PORT=8561
+      - DB_HOST=mysql  # localhost değil, Docker container adı
       - DB_USER=root
       - DB_PASSWORD=
       - DB_NAME=spor_galeri
+      - SESSION_SECRET=oncü1958*imamhatip
     ports:
-      - "8561:8561"  
+      - "8561:8561"  # Host:Container port mapping
     depends_on:
       - mysql
 
@@ -39,11 +41,11 @@ services:
     restart: always
     environment:
       - PMA_HOST=mysql
-      - PMA_PORT=3605
+      - PMA_PORT=3306  # MySQL'in standart portu 3306'dır, 3605 değil
       - PMA_USER=root
       - PMA_PASSWORD=
     ports:
-      - "5283:80"  
+      - "5283:80"
     depends_on:
       - mysql
 
