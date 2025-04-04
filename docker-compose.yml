@@ -12,14 +12,15 @@ services:
       - DB_PASSWORD=
       - DB_NAME=spor_galeri
     ports:
-      - "8060:3000" 
+      - "8060:3000"  # Backend 8060 portuna bağlanacak
+    depends_on:
       - mysql
 
   frontend:
     build:
       context: ./frontend
     ports:
-      - "3000:80" 
+      - "3000:80"  # Frontend 3000 portuna bağlanacak
     depends_on:
       - backend
 
@@ -31,6 +32,9 @@ services:
       - MYSQL_DATABASE=spor_galeri
     volumes:
       - mysql_data:/var/lib/mysql
+    # Gerekirse port yönlendirmesini yoruma dönüştürebilirsiniz
+    # ports:
+    #   - "3306:3306"
     command: --default-authentication-plugin=mysql_native_password
 
   phpmyadmin:
@@ -42,7 +46,7 @@ services:
       - PMA_USER=root
       - PMA_PASSWORD=
     ports:
-      - "5083:80"  
+      - "5083:80"  # PHPMyAdmin 5083 portuna bağlanacak
     depends_on:
       - mysql
 
