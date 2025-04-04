@@ -5,7 +5,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 
-// Environment variables
 dotenv.config({ path: './src/config/.env' });
 
 // Import routes
@@ -65,7 +64,7 @@ app.use('/admin', adminRoutes);
 app.use('/api', tournamentRoutes);
 
 // Server setup
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8060;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

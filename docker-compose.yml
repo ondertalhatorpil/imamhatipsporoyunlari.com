@@ -12,7 +12,7 @@ services:
       - DB_PASSWORD=
       - DB_NAME=spor_galeri
     ports:
-      - "8561:3000"  
+      - "8561:8561"  
     depends_on:
       - mysql
 
@@ -39,7 +39,7 @@ services:
     restart: always
     environment:
       - PMA_HOST=mysql
-      - PMA_PORT=3606
+      - PMA_PORT=3605
       - PMA_USER=root
       - PMA_PASSWORD=
     ports:
