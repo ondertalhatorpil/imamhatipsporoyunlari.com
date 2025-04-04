@@ -17,8 +17,8 @@ FROM nginx:stable-alpine as production-stage
 # Build aşamasında oluşturulan dosyaları nginx'e kopyala
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-# nginx yapılandırmasını kopyala (eğer özelleştirilmişse)
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Nginx yapılandırma dosyasını kopyala
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

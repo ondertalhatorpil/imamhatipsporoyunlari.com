@@ -2,18 +2,17 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Uygulama bağımlılıklarını kopyala ve yükle
+# Önce package.json ve package-lock.json dosyalarını kopyala
 COPY package*.json ./
+
+# Modülleri yükle
 RUN npm install
 
-# Uygulama kaynak kodunu kopyala
+# Sonra diğer tüm dosyaları kopyala
 COPY . .
 
-# Gerekirse environment değişkenlerini ayarla
-ENV NODE_ENV production
-
-# Port'u aç
-EXPOSE 3000
+# Uygulamanın çalışacağı portu belirle
+EXPOSE 8561
 
 # Uygulamayı başlat
-CMD ["node", "src/server.js"]
+CMD ["npm", "start"]
