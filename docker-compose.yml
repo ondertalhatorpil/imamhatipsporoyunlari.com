@@ -43,7 +43,7 @@ services:
       - PMA_USER=root
       - PMA_PASSWORD=
     ports:
-      - "5083:80"  
+      - "5283:80"  
     depends_on:
       - mysql
 
