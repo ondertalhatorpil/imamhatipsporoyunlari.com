@@ -64,7 +64,7 @@ app.use('/admin', adminRoutes);
 app.use('/api', tournamentRoutes);
 
 // Server setup
-const PORT = process.env.PORT || 8060;
+const PORT = process.env.PORT || 8061;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
