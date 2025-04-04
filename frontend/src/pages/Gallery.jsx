@@ -18,10 +18,15 @@ const Gallery = () => {
 
   const fetchPhotos = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/photos?year=${activeYear}`,
-        { headers: { 'Accept': 'application/json' } }
-      );
+      // Environment'a göre URL belirleme
+      const baseUrl = import.meta.env.PROD 
+        ? `/api/photos?year=${activeYear}` 
+        : `http://localhost:8561/api/photos?year=${activeYear}`;
+      
+      const response = await axios.get(baseUrl, {
+        headers: { 'Accept': 'application/json' }
+      });
+      
       console.log('API yanıtı:', response.data);
       setPhotos(response.data.photos || []);
       setLoading(false);

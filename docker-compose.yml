@@ -41,7 +41,7 @@ services:
     restart: always
     environment:
       - PMA_HOST=mysql
-      - PMA_PORT=3306  # MySQL'in standart portu 3306'dır, 3605 değil
+      - PMA_PORT=3306  
       - PMA_USER=root
       - PMA_PASSWORD=
     ports:

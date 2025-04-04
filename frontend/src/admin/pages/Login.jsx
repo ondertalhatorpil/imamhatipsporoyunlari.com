@@ -13,14 +13,16 @@ const Login = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
+    
     try {
+      const baseUrl = import.meta.env.PROD ? '/admin/login' : 'http://localhost:8561/admin/login';
+      
       console.log('Giriş isteği gönderiliyor:', { username, password });
-      const response = await axios.post('http://localhost:3000/admin/login', {
+      const response = await axios.post(baseUrl, {
         username,
         password
       }, { withCredentials: true });
-
+      
       console.log('Giriş yanıtı:', response.data);
       
       if (response.data.success) {
