@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { adminService } from '../../services/api';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -15,17 +15,12 @@ const Login = () => {
     setLoading(true);
     
     try {
-      const baseUrl = import.meta.env.PROD ? '/admin/login' : 'http://localhost:8561/admin/login';
-      
       console.log('Giriş isteği gönderiliyor:', { username, password });
-      const response = await axios.post(baseUrl, {
-        username,
-        password
-      }, { withCredentials: true });
+      const response = await adminService.login(username, password);
       
-      console.log('Giriş yanıtı:', response.data);
+      console.log('Giriş yanıtı:', response);
       
-      if (response.data.success) {
+      if (response.success) {
         sessionStorage.setItem('isLoggedIn', 'true');
         console.log('Giriş başarılı, dashboard sayfasına yönlendiriliyor');
         navigate('/admin/dashboard', { replace: true });

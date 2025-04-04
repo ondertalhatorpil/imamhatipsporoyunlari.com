@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Download, Eye } from 'lucide-react';
-import axios from 'axios'
-
+import { photoService } from '../services/api'; // Servis kullanımını ekleyin
 
 const Gallery = () => {
   const [activeYear, setActiveYear] = useState('2024');
@@ -10,36 +9,37 @@ const Gallery = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     // Backend'den fotoğrafları çekmek için API isteği
-    fetchPhotos(activeYear);
+    fetchPhotos();
   }, [activeYear]);
 
   const fetchPhotos = async () => {
     try {
-      // Environment'a göre URL belirleme
-      const baseUrl = import.meta.env.PROD 
-        ? `/api/photos?year=${activeYear}` 
-        : `http://localhost:8561/api/photos?year=${activeYear}`;
+      setLoading(true);
+      // photoService'i kullanın
+      const data = await photoService.getPhotosByYear(activeYear);
       
-      const response = await axios.get(baseUrl, {
-        headers: { 'Accept': 'application/json' }
-      });
-      
-      console.log('API yanıtı:', response.data);
-      setPhotos(response.data.photos || []);
+      console.log('API yanıtı:', data);
+      setPhotos(data.photos || []);
       setLoading(false);
     } catch (error) {
       console.error('Fotoğraflar yüklenirken hata:', error);
-      // Yanıtı kontrol edin
-      if (error.response) {
-        console.error('Yanıt veri:', error.response.data);
-        console.error('Yanıt durumu:', error.response.status);
-      }
       setError('Fotoğraflar yüklenemedi');
       setLoading(false);
     }
+  };
+
+  const handleDownload = (photoId, photoUrl) => {
+    // İndirme işlemi...
+    console.log(`Fotoğraf indiriliyor: ${photoId}`);
+    window.open(getPhotoUrl(photoUrl), '_blank');
+  };
+
+  // Fotoğraf URL'sini environment'a göre oluştur
+  const getPhotoUrl = (photoPath) => {
+    const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
+    return `${baseUrl}${photoPath}`;
   };
 
   // Örnek fotoğraf verisi (API çalışmadığında gösterilecek)
@@ -96,7 +96,7 @@ const Gallery = () => {
               >
                 <div className="relative">
                   <img
-                    src={`http://localhost:3000${photo.url}`}
+                    src={getPhotoUrl(photo.url)}
                     alt={photo.title}
                     className="w-full h-64 object-cover"
                     onError={(e) => console.error("Fotoğraf yüklenemedi:", photo.url)}
@@ -144,3 +144,5 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
+
