@@ -44,17 +44,17 @@ const Gallery = () => {
 
 
   const getPhotoUrl = (photoPath) => {
-    const isProd = import.meta.env.PROD;
-
-    const baseUrl = isProd
-      ? 'https://imamhatipsporoyunlari.com:8561'
-      : 'http://localhost:8561';
-
-    const fullUrl = photoPath.startsWith('/uploads')
-      ? `${baseUrl}${photoPath}`
-      : `${baseUrl}/uploads/${photoPath}`;
-
+    // Üretim veya geliştirme ortamına göre baseUrl ayarla
+    const baseUrl = import.meta.env.PROD ? 'https://imamhatipsporoyunlari.com' : 'http://localhost:8561';
+    
+    // photoPath zaten /uploads ile başlıyorsa direkt kullan, yoksa ekle
+    const fullUrl = photoPath.startsWith('/uploads') 
+      ? `${baseUrl}${photoPath}` 
+      : `${baseUrl}/uploads${photoPath}`;
+    
     console.log('Oluşturulan fotoğraf URL:', fullUrl);
+    
+    // return değerini fullUrl olarak değiştirdim (önceki kodda baseUrl+photoPath dönüyordu)
     return fullUrl;
   };
 
