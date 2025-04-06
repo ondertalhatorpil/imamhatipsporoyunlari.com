@@ -54,7 +54,7 @@ services:
     image: phpmyadmin/phpmyadmin
     restart: unless-stopped
     ports:
-      - "8060:80"  # PhpMyAdmin için erişim portu
+      - "8068:80"  # PhpMyAdmin için erişim portu
     environment:
       - PMA_HOST=mysql
       - PMA_PORT=3306
