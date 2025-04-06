@@ -16,7 +16,7 @@ const tournamentRoutes = require('./routes/tournamentRoutes');
 // Initialize app
 const app = express();
 
- app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
 
 
 app.use(cors({

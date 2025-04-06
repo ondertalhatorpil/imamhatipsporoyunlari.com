@@ -36,18 +36,25 @@ const Gallery = () => {
     window.open(getPhotoUrl(photoUrl), '_blank');
   };
 
-  const getPhotoUrl = (photoPath) => {
-    const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
-    
-    // photoPath /uploads/gallery/... ile başlıyorsa, /uploads kısmını kaldırın
-    const fixedPath = photoPath.startsWith('/uploads') 
-      ? photoPath.substring(8) // "/uploads" kısmını kaldır
-      : photoPath;
-    
-    return `${baseUrl}${fixedPath}`;
-  };
-
+ 
+ // Fotoğraf URL'sini environment'a göre oluştur
+const getPhotoUrl = (photoPath) => {
+  // photoPath zaten sunucudan dönen bir yol, ancak bu yol eksik olabilir
+  // photoPath '/uploads/gallery/2024/dosya-adi.jpg' şeklinde olmalı
   
+  // Eğer photoPath zaten '/uploads' ile başlıyorsa, doğrudan kullan
+  if (photoPath.startsWith('/uploads')) {
+    const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
+    return `${baseUrl}${photoPath}`;
+  }
+  
+  // Aksi takdirde, doğru yolu oluştur
+  // Sunucuda fotoğraflar '/public/uploads/gallery/{year}/' dizininde saklanıyor
+  // ve '/uploads' yoluyla servis ediliyor
+  const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
+  return `${baseUrl}/uploads${photoPath}`;
+}
+
   // Örnek fotoğraf verisi (API çalışmadığında gösterilecek)
   const examplePhotos = [
     { id: 1, year: '2024', url: '/api/placeholder/400/320', title: 'Voleybol Takımı', downloadCount: 45 },
