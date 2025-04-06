@@ -36,12 +36,18 @@ const Gallery = () => {
     window.open(getPhotoUrl(photoUrl), '_blank');
   };
 
-  // Fotoğraf URL'sini environment'a göre oluştur
   const getPhotoUrl = (photoPath) => {
     const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
-    return `${baseUrl}${photoPath}`;
+    
+    // photoPath /uploads/gallery/... ile başlıyorsa, /uploads kısmını kaldırın
+    const fixedPath = photoPath.startsWith('/uploads') 
+      ? photoPath.substring(8) // "/uploads" kısmını kaldır
+      : photoPath;
+    
+    return `${baseUrl}${fixedPath}`;
   };
 
+  
   // Örnek fotoğraf verisi (API çalışmadığında gösterilecek)
   const examplePhotos = [
     { id: 1, year: '2024', url: '/api/placeholder/400/320', title: 'Voleybol Takımı', downloadCount: 45 },
