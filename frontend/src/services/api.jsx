@@ -1,8 +1,8 @@
 // src/services/api.js
 import axios from 'axios';
 
-const API_URL = import.meta.env.PROD ? '/api' : 'http://localhost:3000/api';
-const ADMIN_URL = import.meta.env.PROD ? '/admin' : 'http://localhost:3000/admin';
+const API_URL = import.meta.env.PROD ? '/api' : 'http://localhost:8561/api';
+const ADMIN_URL = import.meta.env.PROD ? '/admin' : 'http://localhost:8561/admin';
 
 // API instance oluştur
 const api = axios.create({
@@ -15,6 +15,39 @@ const adminApi = axios.create({
   baseURL: ADMIN_URL,
   withCredentials: true
 });
+
+// src/services/api.js dosyasında aşağıdaki değişiklikleri yapın
+
+// API instance oluşturup istekte bulunduktan sonra bir interceptor ekleyelim
+api.interceptors.response.use(
+  response => response,
+  async error => {
+    // 401 Unauthorized hatası alındığında
+    if (error.response && error.response.status === 401) {
+      console.log('Yetkisiz erişim hatası. Oturum kontrolü yapılıyor.');
+      
+      // Saklanan oturum durumunu sıfırla
+      sessionStorage.removeItem('isLoggedIn');
+      
+      // Login sayfasına yönlendir (bu kısmı bir utility fonksiyonundan çağırabilirsiniz)
+      window.location.href = '/admin/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
+adminApi.interceptors.response.use(
+  response => response,
+  async error => {
+    if (error.response && error.response.status === 401) {
+      console.log('Yetkisiz erişim hatası. Oturum kontrolü yapılıyor.');
+      sessionStorage.removeItem('isLoggedIn');
+      window.location.href = '/admin/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
 
 // Admin kimlik doğrulama işlemleri
 export const adminService = {

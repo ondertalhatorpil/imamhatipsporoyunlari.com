@@ -21,9 +21,22 @@ const Login = () => {
       console.log('Giriş yanıtı:', response);
       
       if (response.success) {
-        sessionStorage.setItem('isLoggedIn', 'true');
-        console.log('Giriş başarılı, dashboard sayfasına yönlendiriliyor');
-        navigate('/admin/dashboard', { replace: true });
+        // Oturum durumunu doğrula
+        try {
+          const authCheck = await adminService.checkAuth();
+          console.log('Oturum doğrulama yanıtı:', authCheck);
+          
+          if (authCheck.isAuthenticated) {
+            sessionStorage.setItem('isLoggedIn', 'true');
+            console.log('Giriş başarılı, dashboard sayfasına yönlendiriliyor');
+            navigate('/admin/dashboard', { replace: true });
+          } else {
+            setError('Oturum başarılı oldu ancak doğrulanamadı');
+          }
+        } catch (authError) {
+          console.error('Oturum doğrulama hatası:', authError);
+          setError('Oturum doğrulama hatası: ' + (authError.message || 'Bilinmeyen hata'));
+        }
       } else {
         setError('Giriş başarısız. Sunucu başarılı bir yanıt dönmedi.');
       }

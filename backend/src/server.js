@@ -19,7 +19,6 @@ const app = express();
 app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
 
 
-// Middleware
 app.use(cors({
   origin: function(origin, callback) {
     // Localhost'un herhangi bir port numarasına ve üretim domainlerine izin ver
@@ -40,7 +39,7 @@ app.use(cors({
       callback(new Error('CORS policy violation'));
     }
   },
-  credentials: true
+  credentials: true // Bu ayar zaten var, iyi
 }));
 
 app.use(bodyParser.json());
@@ -48,11 +47,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Session middleware
 const session = require('express-session');
+// server.js içinde
 app.use(session({
   secret: process.env.SESSION_SECRET || 'oncü1958*',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: process.env.NODE_ENV === 'production' }
+  resave: true, // Değişti: false yerine true
+  saveUninitialized: true, // Değişti: false yerine true
+  cookie: {
+    secure: false, // Değişti: Lokalda false olmalı, https olmadığı için
+    httpOnly: false,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000 // 1 gün
+  }
 }));
 
 // Static files

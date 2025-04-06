@@ -1,18 +1,14 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Önce package.json ve package-lock.json dosyalarını kopyala
 COPY package*.json ./
+RUN npm install --production
 
-# Modülleri yükle
-RUN npm install
-
-# Sonra diğer tüm dosyaları kopyala
 COPY . .
 
-# Uygulamanın çalışacağı portu belirle
-EXPOSE 8561
+# Yükleme dizinini oluştur
+RUN mkdir -p ./public/uploads/gallery
 
-# Uygulamayı başlat
-CMD ["npm", "start"]
+EXPOSE 8561
+CMD ["node", "src/server.js"]

@@ -1,11 +1,10 @@
-// src/admin/pages/PhotosPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { photoService } from '../../services/api'; // api.js'ten photoService'i import ediyoruz
 import PhotoTable from '../components/PhotoTable';
 
 const PhotosPage = () => {
-  const [photos, setPhotos] = useState([]);  // Boş dizi ile başlatın
+  const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -17,24 +16,22 @@ const PhotosPage = () => {
   const fetchPhotos = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/admin/photos', {
-        withCredentials: true
-      });
-      // API yanıtının format kontrolü yap ve güvenli bir şekilde verileri al
-      if (response.data && Array.isArray(response.data.photos)) {
-        setPhotos(response.data.photos);
-      } else if (response.data && Array.isArray(response.data)) {
-        // Belki API doğrudan dizi dönüyor olabilir
-        setPhotos(response.data);
+      // axios yerine photoService kullanıyoruz
+      const data = await photoService.getAllPhotos();
+      
+      // API yanıtının format kontrolü
+      if (Array.isArray(data.photos)) {
+        setPhotos(data.photos);
+      } else if (Array.isArray(data)) {
+        setPhotos(data);
       } else {
-        // Veri yapısı beklenen formatta değilse boş dizi kullan
         setPhotos([]);
-        console.error('API yanıtı beklenen formatta değil:', response.data);
+        console.error('API yanıtı beklenen formatta değil:', data);
         setError('Veri formatı uygun değil');
       }
     } catch (error) {
       console.error('Error fetching photos:', error);
-      setPhotos([]); // Hata durumunda da boş dizi kullan
+      setPhotos([]);
       setError('Fotoğraflar yüklenirken bir hata oluştu.');
     } finally {
       setLoading(false);
@@ -43,9 +40,8 @@ const PhotosPage = () => {
 
   const handleDeletePhoto = async (photoId) => {
     try {
-      await axios.delete(`http://localhost:3000/admin/photos/${photoId}`, {
-        withCredentials: true
-      });
+      // axios yerine photoService kullanıyoruz
+      await photoService.deletePhoto(photoId);
       setPhotos(photos.filter(photo => photo.id !== photoId));
       alert('Fotoğraf başarıyla silindi.');
     } catch (error) {

@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 const PhotoTable = ({ photos = [], onDelete, onRefresh }) => {
   const [yearFilter, setYearFilter] = useState('all');
   
+  // API URL'yi ortam değişkenlerinden al
+  const API_URL = import.meta.env.PROD ? '' : 'http://localhost:8561';
+  
   // Photos dizisi tanımlı olduğundan emin ol
   const safePhotos = Array.isArray(photos) ? photos : [];
   
@@ -75,7 +78,7 @@ const PhotoTable = ({ photos = [], onDelete, onRefresh }) => {
                 <td className="py-2 px-4 border-b">{photo.id}</td>
                 <td className="py-2 px-4 border-b">
                   <img 
-                    src={`http://localhost:3000${photo.url}`} 
+                    src={`${API_URL}${photo.url}`} 
                     alt={photo.title || 'Fotoğraf'}
                     className="w-16 h-16 object-cover rounded"
                     onError={(e) => {

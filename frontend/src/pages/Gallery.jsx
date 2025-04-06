@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Download, Eye } from 'lucide-react';
-import { photoService } from '../services/api'; // Servis kullanımını ekleyin
+import { photoService } from '../services/api'; 
 
 const Gallery = () => {
   const [activeYear, setActiveYear] = useState('2024');
