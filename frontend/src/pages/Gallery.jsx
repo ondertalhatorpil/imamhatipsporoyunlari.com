@@ -58,7 +58,7 @@ const getPhotoUrl = (photoPath) => {
   // Sunucuda fotoğraflar '/public/uploads/gallery/{year}/' dizininde saklanıyor
   // ve '/uploads' yoluyla servis ediliyor
   const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
-  return `${baseUrl}/uploads${photoPath}`;
+  return `${baseUrl}${photoPath}`;
 }
 
   // Örnek fotoğraf verisi (API çalışmadığında gösterilecek)
