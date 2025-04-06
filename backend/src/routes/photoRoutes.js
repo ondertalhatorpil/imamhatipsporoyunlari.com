@@ -60,7 +60,17 @@ router.get('/photos/all', photoController.getAllPhotos);
 router.get('/photos/:id', photoController.getPhotoById);
 
 // Admin fotoğraf API'leri
-router.post('/photos/upload', isAuthenticated, upload.array('photos', 10), photoController.uploadPhotos);
+router.post('/photos/upload', isAuthenticated, (req, res, next) => {
+  upload.array('photos', 10)(req, res, (err) => {
+    if (err) {
+      console.error('Multer hatası:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    // Hata yoksa controller'a devam et
+    photoController.uploadPhotos(req, res, next);
+  });
+});
+
 router.delete('/photos/:id', isAuthenticated, photoController.deletePhoto);
 
 module.exports = router;

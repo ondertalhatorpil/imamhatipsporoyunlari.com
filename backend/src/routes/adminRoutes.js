@@ -66,7 +66,16 @@ const upload = multer({
 // Admin fotoğraf API'leri
 router.get('/photos', isAuthenticated, photoController.getAllPhotos);
 router.get('/photos/:id', isAuthenticated, photoController.getPhotoById);
-router.post('/upload', isAuthenticated, upload.array('photos', 10), photoController.uploadPhotos);
+router.post('/upload', isAuthenticated, (req, res, next) => {
+  upload.array('photos', 10)(req, res, (err) => {
+    if (err) {
+      console.error('Multer hatası:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    // Hata yoksa controller'a devam et
+    photoController.uploadPhotos(req, res, next);
+  });
+});
 router.delete('/photos/:id', isAuthenticated, photoController.deletePhoto);
 
 router.post('/login', (req, res) => {
