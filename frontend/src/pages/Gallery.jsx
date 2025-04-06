@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Download, Eye } from 'lucide-react';
-import { photoService } from '../services/api'; 
+import { photoService } from '../services/api';
 
 const Gallery = () => {
   const [activeYear, setActiveYear] = useState('2024');
@@ -13,20 +13,20 @@ const Gallery = () => {
     // Backend'den fotoğrafları çekmek için API isteği
     fetchPhotos();
   }, [activeYear]);
-  
+
   const fetchPhotos = async () => {
     try {
       setLoading(true);
       // photoService'i kullanın
       const data = await photoService.getPhotosByYear(activeYear);
-      
+
       console.log('API yanıtı:', data);
-      
+
       // İlk fotoğrafın URL'sini kontrol et
       if (data.photos && data.photos.length > 0) {
         console.log('İlk fotoğraf URL:', data.photos[0].url);
       }
-      
+
       setPhotos(data.photos || []);
       setLoading(false);
     } catch (error) {
@@ -42,24 +42,23 @@ const Gallery = () => {
     window.open(getPhotoUrl(photoUrl), '_blank');
   };
 
- 
- // Fotoğraf URL'sini environment'a göre oluştur
-const getPhotoUrl = (photoPath) => {
-  // photoPath zaten sunucudan dönen bir yol, ancak bu yol eksik olabilir
-  // photoPath '/uploads/gallery/2024/dosya-adi.jpg' şeklinde olmalı
-  
-  // Eğer photoPath zaten '/uploads' ile başlıyorsa, doğrudan kullan
-  if (photoPath.startsWith('/uploads')) {
-    const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
-    return `${baseUrl}${photoPath}`;
-  }
-  
-  // Aksi takdirde, doğru yolu oluştur
-  // Sunucuda fotoğraflar '/public/uploads/gallery/{year}/' dizininde saklanıyor
-  // ve '/uploads' yoluyla servis ediliyor
-  const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
-  return `${baseUrl}${photoPath}`;
-}
+
+  const getPhotoUrl = (photoPath) => {
+    const isProd = import.meta.env.PROD;
+
+    const baseUrl = isProd
+      ? 'https://imamhatipsporoyunlari.com:8561'
+      : 'http://localhost:8561';
+
+    const fullUrl = photoPath.startsWith('/uploads')
+      ? `${baseUrl}${photoPath}`
+      : `${baseUrl}/uploads/${photoPath}`;
+
+    console.log('Oluşturulan fotoğraf URL:', fullUrl);
+    return fullUrl;
+  };
+
+
 
   // Örnek fotoğraf verisi (API çalışmadığında gösterilecek)
   const examplePhotos = [
@@ -118,8 +117,13 @@ const getPhotoUrl = (photoPath) => {
                     src={getPhotoUrl(photo.url)}
                     alt={photo.title}
                     className="w-full h-64 object-cover"
-                    onError={(e) => console.error("Fotoğraf yüklenemedi:", photo.url)}
+                    onError={(e) => {
+                      console.error("Fotoğraf yüklenemedi:", photo.url);
+                      console.error("Tam URL:", getPhotoUrl(photo.url));
+                    }}
                   />
+
+
                   <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center items-center p-4 text-white">
                     <button
                       onClick={() => handleDownload(photo.id, photo.url)}
