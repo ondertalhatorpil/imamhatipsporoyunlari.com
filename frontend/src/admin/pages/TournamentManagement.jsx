@@ -95,16 +95,16 @@ const TournamentManagement = () => {
   const handleMatchScoreUpdated = async (matchId, scores) => {
     try {
       await tournamentService.updateMatchScore(matchId, scores);
-      
+
       // Maç listesini güncelle
-      setMatches(matches.map(match => 
-        match.id === matchId 
-          ? { 
-              ...match, 
-              team1_score: scores.team1_score, 
-              team2_score: scores.team2_score,
-              is_finished: true 
-            } 
+      setMatches(matches.map(match =>
+        match.id === matchId
+          ? {
+            ...match,
+            team1_score: scores.team1_score,
+            team2_score: scores.team2_score,
+            is_finished: true
+          }
           : match
       ));
     } catch (err) {
@@ -116,20 +116,20 @@ const TournamentManagement = () => {
   return (
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-2xl font-bold mb-6">Turnuva Yönetimi</h1>
-      
+
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* 1. Sütun: Turnuva Yönetimi */}
         <div className="bg-white p-4 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Turnuvalar</h2>
-          
+
           <CreateTournamentForm onTournamentCreated={handleTournamentCreated} />
-          
+
           <div className="mt-4">
             <h3 className="font-medium mb-2">Mevcut Turnuvalar</h3>
             {loading && tournaments.length === 0 ? (
@@ -137,12 +137,11 @@ const TournamentManagement = () => {
             ) : tournaments.length > 0 ? (
               <div className="space-y-2">
                 {tournaments.map(tournament => (
-                  <div 
+                  <div
                     key={tournament.id}
-                    className={`p-3 rounded cursor-pointer border ${
-                      selectedTournament?.id === tournament.id ? 
-                      'bg-blue-50 border-blue-500' : 'hover:bg-gray-50 border-gray-200'
-                    }`}
+                    className={`p-3 rounded cursor-pointer border ${selectedTournament?.id === tournament.id ?
+                        'bg-blue-50 border-blue-500' : 'hover:bg-gray-50 border-gray-200'
+                      }`}
                     onClick={() => setSelectedTournament(tournament)}
                   >
                     <p className="font-medium">{tournament.name}</p>
@@ -155,22 +154,22 @@ const TournamentManagement = () => {
             )}
           </div>
         </div>
-        
+
         {/* 2. Sütun: Aşama Yönetimi */}
         <div className="bg-white p-4 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Aşamalar</h2>
-          
+
           {selectedTournament ? (
             <>
               <p className="mb-4">
                 <span className="font-medium">Seçili Turnuva:</span> {selectedTournament.name}
               </p>
-              
-              <CreateStageForm 
-                tournamentId={selectedTournament.id} 
-                onStageCreated={handleStageCreated} 
+
+              <CreateStageForm
+                tournamentId={selectedTournament.id}
+                onStageCreated={handleStageCreated}
               />
-              
+
               <div className="mt-4">
                 <h3 className="font-medium mb-2">Mevcut Aşamalar</h3>
                 {loading && stages.length === 0 ? (
@@ -178,12 +177,11 @@ const TournamentManagement = () => {
                 ) : stages.length > 0 ? (
                   <div className="space-y-2">
                     {stages.map(stage => (
-                      <div 
+                      <div
                         key={stage.id}
-                        className={`p-3 rounded cursor-pointer border ${
-                          selectedStage?.id === stage.id ? 
-                          'bg-blue-50 border-blue-500' : 'hover:bg-gray-50 border-gray-200'
-                        }`}
+                        className={`p-3 rounded cursor-pointer border ${selectedStage?.id === stage.id ?
+                            'bg-blue-50 border-blue-500' : 'hover:bg-gray-50 border-gray-200'
+                          }`}
                         onClick={() => setSelectedStage(stage)}
                       >
                         <p className="font-medium">{stage.name}</p>
@@ -200,90 +198,107 @@ const TournamentManagement = () => {
             <p>Lütfen sol taraftan bir turnuva seçin.</p>
           )}
         </div>
-        
+
         {/* 3. Sütun: Maç Yönetimi */}
         <div className="bg-white p-4 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Maçlar</h2>
-          
+
           {selectedStage ? (
             <>
               <p className="mb-4">
                 <span className="font-medium">Seçili Aşama:</span> {selectedStage.name}
               </p>
-              
-              <CreateMatchForm 
-                stageId={selectedStage.id} 
-                onMatchCreated={handleMatchCreated} 
+
+              <CreateMatchForm
+                stageId={selectedStage.id}
+                onMatchCreated={handleMatchCreated}
               />
-              
+
               <div className="mt-4">
                 <h3 className="font-medium mb-2">Mevcut Maçlar</h3>
                 {loading && matches.length === 0 ? (
                   <p>Yükleniyor...</p>
                 ) : matches.length > 0 ? (
                   <div className="space-y-4">
-                    {matches.map(match => (
-                      <div 
-                        key={match.id}
-                        className="p-3 rounded border border-gray-200"
-                      >
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="font-medium">{match.team1_name} vs {match.team2_name}</span>
-                          <span className="text-sm text-gray-600">
-                            {new Date(match.match_time).toLocaleString('tr-TR', {
-                              day: '2-digit',
-                              month: '2-digit',
-                              year: 'numeric',
-                              hour: '2-digit',
-                              minute: '2-digit'
-                            })}
-                          </span>
+                    {matches.map(match => {
+                      // Tarih formatlaması için yardımcı fonksiyon
+                      const formatMatchTime = (isoDateString) => {
+                        if (!isoDateString) return '';
+
+                        // ISO formatındaki string'i Date nesnesine dönüştür
+                        const matchDate = new Date(isoDateString);
+
+                        // Tarih ve saat bilgisinin parçalarını al
+                        const year = matchDate.getUTCFullYear();
+                        const month = String(matchDate.getUTCMonth() + 1).padStart(2, '0');
+                        const day = String(matchDate.getUTCDate()).padStart(2, '0');
+                        const hours = String(matchDate.getUTCHours()).padStart(2, '0');
+                        const minutes = String(matchDate.getUTCMinutes()).padStart(2, '0');
+
+                        // Türkçe formatında tarih ve saat string'i oluştur
+                        return `${day}.${month}.${year} ${hours}:${minutes}`;
+                      };
+
+                      // Formatlanmış tarih ve saati al
+                      const formattedDateTime = formatMatchTime(match.match_time);
+
+                      return (
+                        <div
+                          key={match.id}
+                          className="p-3 rounded border border-gray-200"
+                        >
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-medium">{match.team1_name} vs {match.team2_name}</span>
+                            <span className="text-sm text-gray-600">
+                              {formattedDateTime}
+                            </span>
+                          </div>
+
+                          {match.is_finished ? (
+                            <div className="text-center font-bold">
+                              {match.team1_score} - {match.team2_score}
+                            </div>
+                          ) : (
+                            <div className="flex items-center space-x-2 mt-2">
+                              <input
+                                type="number"
+                                className="w-16 border rounded p-1"
+                                placeholder="Skor"
+                                min="0"
+                                id={`team1_score_${match.id}`}
+                              />
+                              <span className="font-bold">-</span>
+                              <input
+                                type="number"
+                                className="w-16 border rounded p-1"
+                                placeholder="Skor"
+                                min="0"
+                                id={`team2_score_${match.id}`}
+                              />
+                              <button
+                                className="ml-2 bg-blue-500 text-white px-3 py-1 rounded"
+                                onClick={() => {
+                                  const team1ScoreInput = document.getElementById(`team1_score_${match.id}`);
+                                  const team2ScoreInput = document.getElementById(`team2_score_${match.id}`);
+
+                                  const team1Score = parseInt(team1ScoreInput.value);
+                                  const team2Score = parseInt(team2ScoreInput.value);
+
+                                  if (!isNaN(team1Score) && !isNaN(team2Score)) {
+                                    handleMatchScoreUpdated(match.id, {
+                                      team1_score: team1Score,
+                                      team2_score: team2Score
+                                    });
+                                  }
+                                }}
+                              >
+                                Kaydet
+                              </button>
+                            </div>
+                          )}
                         </div>
-                        
-                        {match.is_finished ? (
-                          <div className="text-center font-bold">
-                            {match.team1_score} - {match.team2_score}
-                          </div>
-                        ) : (
-                          <div className="flex items-center space-x-2 mt-2">
-                            <input 
-                              type="number" 
-                              className="w-16 border rounded p-1"
-                              placeholder="Skor"
-                              min="0"
-                              id={`team1_score_${match.id}`}
-                            />
-                            <span className="font-bold">-</span>
-                            <input 
-                              type="number" 
-                              className="w-16 border rounded p-1"
-                              placeholder="Skor"
-                              min="0"
-                              id={`team2_score_${match.id}`}
-                            />
-                            <button 
-                              className="ml-2 bg-blue-500 text-white px-3 py-1 rounded"
-                              onClick={() => {
-                                const team1ScoreInput = document.getElementById(`team1_score_${match.id}`);
-                                const team2ScoreInput = document.getElementById(`team2_score_${match.id}`);
-                                
-                                const team1Score = parseInt(team1ScoreInput.value);
-                                const team2Score = parseInt(team2ScoreInput.value);
-                                
-                                if (!isNaN(team1Score) && !isNaN(team2Score)) {
-                                  handleMatchScoreUpdated(match.id, {
-                                    team1_score: team1Score,
-                                    team2_score: team2Score
-                                  });
-                                }
-                              }}
-                            >
-                              Kaydet
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 ) : (
                   <p>Bu aşamada henüz maç bulunmuyor.</p>
