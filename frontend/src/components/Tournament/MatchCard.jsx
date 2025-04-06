@@ -2,26 +2,39 @@
 import React from 'react';
 
 const MatchCard = ({ match }) => {
-  const matchTime = new Date(match.match_time);
+  // Tarih ve saat formatlaması için yardımcı fonksiyon
+  // UTC olarak alınan tarihi, yerel saat dilimine dönüştürmeden işler
+  const formatMatchTime = (isoDateString) => {
+    if (!isoDateString) return { date: '', time: '' };
+    
+    // ISO formatındaki string'i Date nesnesine dönüştür
+    const matchDate = new Date(isoDateString);
+    
+    // Tarih ve saat bilgisinin parçalarını al
+    const year = matchDate.getUTCFullYear();
+    const month = String(matchDate.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(matchDate.getUTCDate()).padStart(2, '0');
+    const hours = String(matchDate.getUTCHours()).padStart(2, '0');
+    const minutes = String(matchDate.getUTCMinutes()).padStart(2, '0');
+    
+    // Türkçe formatında tarih ve saat string'leri oluştur
+    const formattedDate = `${day}.${month}.${year}`;
+    const formattedTime = `${hours}:${minutes}`;
+    
+    return { date: formattedDate, time: formattedTime };
+  };
   
-  // Tarih ve saat formatlama
-  const formattedDate = matchTime.toLocaleDateString('tr-TR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  });
-  
-  const formattedTime = matchTime.toLocaleTimeString('tr-TR', { 
-    hour: '2-digit', 
-    minute: '2-digit' 
-  });
+  // Tarih ve saat bilgilerini al
+  const { date: formattedDate, time: formattedTime } = formatMatchTime(match.match_time);
   
   // E84049 rengini kullan (sizin sitenizin rengi)
   const mainColor = '#E84049';
   
-  // Maç durumunu belirle
-  const isUpcoming = !match.is_finished && new Date(match.match_time) > new Date();
-  const isLive = !match.is_finished && new Date(match.match_time) <= new Date();
+  // Maç durumunu belirle - UTC zamanı kullanarak
+  const now = new Date();
+  const matchTimeUTC = new Date(match.match_time);
+  const isUpcoming = !match.is_finished && matchTimeUTC > now;
+  const isLive = !match.is_finished && matchTimeUTC <= now;
   
   return (
     <div className="overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300">
