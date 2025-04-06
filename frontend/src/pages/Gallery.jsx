@@ -13,7 +13,7 @@ const Gallery = () => {
     // Backend'den fotoğrafları çekmek için API isteği
     fetchPhotos();
   }, [activeYear]);
-
+  
   const fetchPhotos = async () => {
     try {
       setLoading(true);
@@ -21,6 +21,12 @@ const Gallery = () => {
       const data = await photoService.getPhotosByYear(activeYear);
       
       console.log('API yanıtı:', data);
+      
+      // İlk fotoğrafın URL'sini kontrol et
+      if (data.photos && data.photos.length > 0) {
+        console.log('İlk fotoğraf URL:', data.photos[0].url);
+      }
+      
       setPhotos(data.photos || []);
       setLoading(false);
     } catch (error) {
