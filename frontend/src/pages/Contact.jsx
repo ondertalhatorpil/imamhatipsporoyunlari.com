@@ -14,7 +14,7 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header with extra top margin */}
         <div className="text-center mb-16 mt-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6 relative inline-block">
+          <h1 className="text-5xl font-bold text-gray-800 mb-6 relative inline-block">
             <span className="relative z-10">İletişim</span>
             <span className="absolute -bottom-2 left-0 right-0 h-3 bg-red-200 opacity-50 z-0"></span>
           </h1>
