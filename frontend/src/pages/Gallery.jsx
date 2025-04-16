@@ -44,18 +44,11 @@ const Gallery = () => {
 
 
   const getPhotoUrl = (photoPath) => {
-    // Üretim veya geliştirme ortamına göre baseUrl ayarla
-    const baseUrl = import.meta.env.PROD ? 'https://imamhatipsporoyunlari.com' : 'http://localhost:8561';
+    // Üretim ortamında boş bir baseUrl kullan (aynı origin)
+    const baseUrl = import.meta.env.PROD ? '' : 'http://localhost:8561';
     
-    // photoPath zaten /uploads ile başlıyorsa direkt kullan, yoksa ekle
-    const fullUrl = photoPath.startsWith('/uploads') 
-      ? `${baseUrl}${photoPath}` 
-      : `${baseUrl}/uploads${photoPath}`;
-    
-    console.log('Oluşturulan fotoğraf URL:', fullUrl);
-    
-    // return değerini fullUrl olarak değiştirdim (önceki kodda baseUrl+photoPath dönüyordu)
-    return fullUrl;
+    // URL'yi düzgün bir şekilde oluştur
+    return `${baseUrl}${photoPath.startsWith('/') ? photoPath : `/${photoPath}`}`;
   };
 
 
@@ -74,9 +67,17 @@ const Gallery = () => {
     <div className="w-full py-16 px-4 md:px-8 mt-10">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6">Fotoğraf Galerisi</h1>
-
-          <div className="max-w-3xl mx-auto mb-8">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-gray-800 mb-6 relative inline-block">
+            <span className="relative z-10">Fotoraf Albümü </span>
+            <span className="absolute -bottom-2 left-0 right-0 h-3 bg-red-200 opacity-50 z-0"></span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-6">
+            Yıllara göre özel seçtiğimiz fotoraf albümümüzü inceleyebilirsiniz, isterseniz indirip paylaşadabilirsiniz.
+          </p>
+        </div>
+  
+          <div className="max-w-xl mx-auto mb-8">
             <a
               href="https://drive.google.com/drive/folders/13u3KOYN7elfUP0Dpqd04aMCwxJ10J5Rc"
               className="block w-full bg-red-500 hover:bg-red-600 text-white text-center py-4 px-6 rounded-lg text-lg transition-colors"
@@ -84,7 +85,7 @@ const Gallery = () => {
               15. İmam Hatip Spor Oyunları Fotoğraf Arşivi için tıklayınız
             </a>
           </div>
-
+  
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {years.map((year) => (
               <button
@@ -100,7 +101,7 @@ const Gallery = () => {
             ))}
           </div>
         </div>
-
+  
         {loading ? (
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
@@ -122,8 +123,7 @@ const Gallery = () => {
                       console.error("Tam URL:", getPhotoUrl(photo.url));
                     }}
                   />
-
-
+  
                   <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center items-center p-4 text-white">
                     <button
                       onClick={() => handleDownload(photo.id, photo.url)}

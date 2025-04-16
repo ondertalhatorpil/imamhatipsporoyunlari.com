@@ -7,7 +7,6 @@ import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Awards from './pages/awards/DerecePage';
 import Instructions from './pages/Instructions';
-import Schedule from './pages/Schedule';
 import Tournament from './pages/Tournament'; 
 
 
@@ -33,7 +32,6 @@ const AppRoutes = () => {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/dereceye-girenler" element={<Awards />} />
         <Route path="/instructions" element={<Instructions />} />
-        <Route path="/schedule" element={<Schedule />} />
         <Route path="/turnuva" element={<Tournament />} />
 
       </Route>

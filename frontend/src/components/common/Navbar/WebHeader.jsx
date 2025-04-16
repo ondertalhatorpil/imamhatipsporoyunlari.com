@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Instagram, Twitter, Facebook, Youtube } from 'lucide-react';
 
 import Logo from './altli_logo.png'
 
@@ -8,17 +7,24 @@ const WebHeader = () => {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('');
 
-  const navLinks = [
+  // Sol köşede olacak linkler
+  const leftNavLinks = [
     { name: 'Anasayfa', path: '/' },
-    { name: 'Derece', path: '/dereceye-girenler' },
-    { name: 'Talimatname', path: '/instructions' },
     { name: 'Galeri', path: '/gallery' },
+    { name: 'İletişim', path: '/iletişim' },
+  ];
+
+  // Sağ köşede olacak linkler
+  const rightNavLinks = [
+    { name: 'Talimatname', path: '/instructions' },
     { name: 'Turnuva', path: '/turnuva' },
+    { name: 'Derece', path: '/dereceye-girenler' },
   ];
 
   useEffect(() => {
     const currentPath = location.pathname;
-    const activeNavLink = navLinks.find(link => link.path === currentPath);
+    const allNavLinks = [...leftNavLinks, ...rightNavLinks];
+    const activeNavLink = allNavLinks.find(link => link.path === currentPath);
     if (activeNavLink) {
       setActiveLink(activeNavLink.name);
     } else {
@@ -26,7 +32,7 @@ const WebHeader = () => {
         setActiveLink('Anasayfa');
       }
     }
-  }, [location, navLinks]);
+  }, [location, leftNavLinks, rightNavLinks]);
 
   return (
     <header className="relative pt-5 pb-6 pl-4 pr-5 w-full md:w-11/12 lg:w-10/12 mx-auto rounded-b-3xl shadow-md z-40"
@@ -45,18 +51,19 @@ const WebHeader = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
 
-          {/* Left Side - Page Links */}
+          {/* Sol Köşe - Anasayfa, Galeri, İletişim */}
           <div className="w-1/3 flex justify-start">
             <nav className="hidden md:block">
-              <ul className="flex space-x-6">
-                {navLinks.map((link) => (
-                  <li key={link.name}>
+              <ul className="flex">
+                {leftNavLinks.map((link) => (
+                  <li key={link.name} className="mr-2">
                     <Link
                       to={link.path}
-                      className={`text-white font-medium py-2 px-1 border-b-2 transition-all duration-200 ${activeLink === link.name
+                      className={`text-white text-sm font-medium py-1 px-2 border-b-2 transition-all duration-200 ${
+                        activeLink === link.name
                           ? 'border-white'
                           : 'border-transparent hover:border-white/50'
-                        }`}
+                      }`}
                       onClick={() => setActiveLink(link.name)}
                     >
                       {link.name}
@@ -67,52 +74,32 @@ const WebHeader = () => {
             </nav>
           </div>
 
+          {/* Orta - Logo için boşluk */}
+          <div className="w-1/3 flex justify-center">
+            {/* Logo absolute positioned */}
+          </div>
 
-          {/* Right Side - Social Media Links */}
+          {/* Sağ Köşe - Talimatname, Turnuva, Derece */}
           <div className="w-1/3 flex justify-end">
-            <div className="flex items-center space-x-4">
-              <a
-                href="https://www.instagram.com/oncugenclikspor/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-white/80 transition-colors"
-              >
-                <Instagram size={24} strokeWidth={1.5} />
-              </a>
-              <a
-                href="https://x.com/oncugenclikspor"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-white/80 transition-colors"
-              >
-                <Twitter size={24} strokeWidth={1.5} />
-              </a>
-              <a
-                href="https://www.facebook.com/OncuGenclikveSpor/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-white/80 transition-colors"
-              >
-                <Facebook size={24} strokeWidth={1.5} />
-              </a>
-              <a
-                href="https://www.youtube.com/@ÖncüSporKulübü"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-white/80 transition-colors"
-              >
-                <Youtube size={24} strokeWidth={1.5} />
-              </a>
-              <Link
-                to="/iletişim"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-black px-6 ml-2 py-2 rounded-lg hover:bg-gray-200 transition"
-              >
-                İletişim
-              </Link>
-
-            </div>
+            <nav className="hidden md:block">
+              <ul className="flex">
+                {rightNavLinks.map((link) => (
+                  <li key={link.name} className="ml-2">
+                    <Link
+                      to={link.path}
+                      className={`text-white text-sm font-medium py-1 px-2 border-b-2 transition-all duration-200 ${
+                        activeLink === link.name
+                          ? 'border-white'
+                          : 'border-transparent hover:border-white/50'
+                      }`}
+                      onClick={() => setActiveLink(link.name)}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </div>
       </div>

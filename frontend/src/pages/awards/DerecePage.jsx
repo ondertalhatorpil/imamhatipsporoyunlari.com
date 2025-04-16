@@ -60,8 +60,9 @@ const DerecePage = () => {
     <>
       <div className="max-w-5xl mx-auto py-10 mt-10 px-4 md:px-6 lg:px-8 min-h-screen">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-red-500 relative inline-block">
-            Şampiyonlar 🏆
+        <h1 className="text-5xl font-bold text-gray-800 mb-6 relative inline-block">
+            <span className="relative z-10">Şampiyonlar 🏆</span>
+            <span className="absolute -bottom-2 left-0 right-0 h-3 bg-red-200 opacity-50 z-0"></span>
           </h1>
           <p className="text-gray-600 text-lg font-medium mt-2">
             15. İmam Hatip Spor Oyunları'nda dereceye giren başarılı sporcularımız

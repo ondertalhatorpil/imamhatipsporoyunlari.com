@@ -5,7 +5,7 @@ import Footer from '../components/common/Footer/Footer.jsx';
 
 const MainLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-gray-100 relative">
       <Navbar />
       <main className="flex-grow">
         <Outlet />
