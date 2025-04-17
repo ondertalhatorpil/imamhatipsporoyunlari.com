@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import {
-  Download,
-  Trophy,
-  Target,
-  Crosshair,
-  Table,
-  ActivitySquare,
-  Search
-} from 'lucide-react';
+import { FaDownload, FaSearch } from 'react-icons/fa';
+import { GiScrollUnfurled, GiDart, GiBowArrow, GiTennisRacket, GiArtificialIntelligence } from 'react-icons/gi';
+import { MdOutlineSportsKabaddi, MdSportsScore } from 'react-icons/md';
+import { IoFootball } from 'react-icons/io5';
+import { FaHandRock } from 'react-icons/fa';
+import { GiShuttlecock, GiRunningShoe } from 'react-icons/gi';
 
 const Instructions = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,63 +12,143 @@ const Instructions = () => {
     {
       id: 1,
       title: "Genel Talimatname",
-      icon: "trophy",
-      color: "pink",
-      file: "genel-talimatname.pdf",
-      description: "Tüm spor branşları için geçerli genel kurallar ve yönergeler"
+      icon: "scroll",
+      color: "blue",
+      file: "Genel_Talimatname.pdf",
+      description: "Tüm sportif etkinlikler için geçerli olan genel kurallar, yönetmelikler ve müsabaka prosedürleri"
     },
     {
       id: 2,
       title: "Dart",
-      icon: "target",
-      color: "pink",
-      file: "dart-talimatname.pdf",
-      description: "Dart oyunu için uluslararası standartlara uygun talimatname"
+      icon: "dart",
+      color: "green",
+      file: "Dart Talimatmane.pdf",
+      description: "Dart müsabakalarının kuralları, puanlama sistemi, ekipman standartları ve turnuva düzenlemeleri"
     },
     {
       id: 3,
       title: "Geleneksel Türk Okçuluğu",
-      icon: "crosshair",
-      color: "pink",
-      file: "okculuk-talimatname.pdf",
-      description: "Geleneksel Türk okçuluğu kuralları ve uygulamaları"
+      icon: "bow",
+      color: "red",
+      file: "GelenekselTürkOkçuluğu.pdf",
+      description: "Geleneksel Türk okçuluğu için tarihsel temelli kurallar, yarışma formatları ve teknik standartlar"
     },
     {
       id: 4,
       title: "Masa Tenisi",
-      icon: "table",
-      color: "pink",
-      file: "masa-tenisi-talimatname.pdf",
-      description: "Masa tenisi müsabakaları için resmi talimatlar"
+      icon: "tennis",
+      color: "purple",
+      file: "MasaTenisiTurnuvası.pdf",
+      description: "Masa tenisi turnuvalarının organizasyonu, maç yönetimi, ekipman gereksinimleri ve hakem kuralları"
     },
     {
       id: 5,
       title: "Taekwondo",
-      icon: "activity",
+      icon: "kabaddi",
+      color: "orange",
+      file: "taekwondotalimatnamesi.pdf",
+      description: "Taekwondo müsabakalarının düzenlenmesi, müsabık kategorileri, teknik kurallar ve puanlama sistemi"
+    },
+    {
+      id: 6,
+      title: "2. Güreş Talimatnamesi",
+      icon: "ai",
+      color: "yellow",
+      file: "gurestlmtnmiki.pdf",
+      description: "Güreş müsabakaları için sikletler, teknik kurallar, galibiyetin belirlenmesi ve turnuva formatı"
+    },
+    {
+      id: 7,
+      title: "Futsal Talimatnamesi",
+      icon: "football",
+      color: "green",
+      file: "FUTSAL Talimatnamesi.pdf",
+      description: "Futsal müsabakalarının organizasyonu, oyun kuralları, sahaya dair standartlar ve turnuva düzeni"
+    },
+    {
+      id: 8,
+      title: "Bilek Güreşi Talimatnamesi",
+      icon: "hand",
+      color: "gray",
+      file: "bilek güreşi talimatnamesi.pdf",
+      description: "Bilek güreşi müsabakaları için teknik detaylar, masa standartları, sikletler ve yarışma prosedürleri"
+    },
+    {
+      id: 9,
+      title: "Badminton Talimatnamesi",
+      icon: "shuttle",
+      color: "teal",
+      file: "Badminton Talimatnamesi.pdf",
+      description: "Badminton müsabakaları için saha özellikleri, raket ve top standartları, maç formatı ve kuralları"
+    },
+    {
+      id: 10,
+      title: "Atletizm Talimatnamesi",
+      icon: "running",
       color: "pink",
-      file: "taekwondo-talimatname.pdf",
-      description: "Taekwondo müsabakaları için teknik ve idari talimatname"
+      file: "atltmtlmt.pdf",
+      description: "Atletizm branşlarının tüm disiplinleri için yarışma kuralları, pist standartları ve hakem yönetmelikleri"
     }
   ]);
 
   const handleDownload = (file) => {
-    window.open(`/public/assets/talimatname/${file}`, '_blank');
+    try {
+      const fileUrl = `/assets/talimatname/${file}`;
+      
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.setAttribute('download', file);
+      link.setAttribute('target', '_blank');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      console.log(`İndirme başlatıldı: ${file}`);
+    } catch (error) {
+      console.error('İndirme hatası:', error);
+      alert('Dosya indirilemedi. Lütfen daha sonra tekrar deneyin.');
+    }
   };
 
   const getIcon = (iconName) => {
     switch (iconName) {
-      case 'trophy':
-        return <Trophy className="w-12 h-12 text-yellow-500" />;
-      case 'target':
-        return <Target className="w-12 h-12 text-red-500" />;
-      case 'crosshair':
-        return <Crosshair className="w-12 h-12 text-amber-700" />;
-      case 'table':
-        return <Table className="w-12 h-12 text-blue-500" />;
-      case 'activity':
-        return <ActivitySquare className="w-12 h-12 text-black" />;
+      case 'scroll':
+        return <GiScrollUnfurled size={36} className="text-blue-600" />;
+      case 'dart':
+        return <GiDart size={36} className="text-green-600" />;
+      case 'bow':
+        return <GiBowArrow size={36} className="text-red-600" />;
+      case 'tennis':
+        return <GiTennisRacket size={36} className="text-purple-600" />;
+      case 'kabaddi':
+        return <MdOutlineSportsKabaddi size={36} className="text-orange-600" />;
+      case 'ai':
+        return <GiArtificialIntelligence size={36} className="text-yellow-600" />;
+      case 'football':
+        return <IoFootball size={36} className="text-green-700" />;
+      case 'hand':
+        return <FaHandRock size={36} className="text-gray-700" />;
+      case 'shuttle':
+        return <GiShuttlecock size={36} className="text-teal-600" />;
+      case 'running':
+        return <GiRunningShoe size={36} className="text-pink-600" />;
       default:
-        return null;
+        return <MdSportsScore size={36} className="text-blue-600" />;
+    }
+  };
+
+  const getBgColor = (color) => {
+    switch (color) {
+      case 'blue': return 'bg-blue-50';
+      case 'green': return 'bg-green-50';
+      case 'red': return 'bg-red-50';
+      case 'purple': return 'bg-purple-50';
+      case 'orange': return 'bg-orange-50';
+      case 'yellow': return 'bg-yellow-50';
+      case 'gray': return 'bg-gray-50';
+      case 'teal': return 'bg-teal-50';
+      case 'pink': return 'bg-pink-50';
+      default: return 'bg-blue-50';
     }
   };
 
@@ -101,19 +178,21 @@ const Instructions = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full px-5 py-3 pr-12 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-300 shadow-sm"
             />
-            <Search className="absolute right-4 top-3 text-gray-400" />
+            <div className="absolute right-4 top-3 text-gray-400">
+              <FaSearch />
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredTalimatnameler.map((item, index) => (
+          {filteredTalimatnameler.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col h-full"
+              className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col h-full border border-gray-100"
             >
               <div className="p-6 flex-1 flex flex-col">
                 <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mr-4 transition-all duration-300 hover:scale-110">
+                  <div className={`w-16 h-16 rounded-full ${getBgColor(item.color)} flex items-center justify-center mr-4 transition-all duration-300 hover:scale-110 shadow-sm`}>
                     {getIcon(item.icon)}
                   </div>
                   <h3 className="text-xl font-semibold text-gray-800">
@@ -125,10 +204,10 @@ const Instructions = () => {
                 
                 <button
                   onClick={() => handleDownload(item.file)}
-                  className="w-full py-3 px-4 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-300 flex items-center justify-center group"
+                  className="w-full py-3 px-4 bg-[#E84049] hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all duration-300 flex items-center justify-center group shadow-md"
                 >
                   <span className="font-medium">Talimatnameyi İndir</span>
-                  <Download className="ml-2 w-5 h-5 transform group-hover:translate-y-1 transition-transform" />
+                  <FaDownload className="ml-2 w-5 h-5 transform group-hover:translate-y-1 transition-transform" />
                 </button>
               </div>
             </div>
