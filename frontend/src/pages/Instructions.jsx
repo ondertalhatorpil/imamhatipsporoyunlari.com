@@ -51,7 +51,7 @@ const Instructions = () => {
     },
     {
       id: 6,
-      title: "2. Güreş Talimatnamesi",
+      title: "Güreş Talimatnamesi",
       icon: "ai",
       color: "yellow",
       file: "gurestlmtnmiki.pdf",
