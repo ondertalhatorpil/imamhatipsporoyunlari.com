@@ -1,40 +1,30 @@
-// DerecePage.js
+// DerecePage.js - Ana sayfa bileşeni
 import React, { useState, useEffect } from "react";
 import * as XLSX from 'xlsx';
 
-// Spor dalları tanımı
+// Sayfa başına gösterilecek kategori sayısı
+const ITEMS_PER_PAGE = 5;
+
+// Spor branşlarını tanımla
 const sports = [
   { id: 'all', title: 'Tüm Branşlar', icon: '🏆' },
   { id: 'archery', title: 'Okçuluk', icon: '🏹' },
+  { id: 'badminton', title: 'Badminton', icon: '🏸' },
+  { id: 'atletizm', title: 'Atletizm', icon: '🏃' },  
   { id: 'taekwondo', title: 'Taekwondo', icon: '🥋' },
   { id: 'tableTennis', title: 'Masa Tenisi', icon: '🏓' },
   { id: 'dart', title: 'Dart', icon: '🎯' },
-  { id: 'badminton', title: 'Badminton', icon: '🏸' },
-  { id: 'atletizm', title: 'Atletizm', icon: '🏃' },
   { id: 'wrestling', title: 'Bilek Güreşi', icon: '💪' },
   { id: 'gures', title: 'Güreş', icon: '🤼' },
 ];
 
-// Excel sayfalarını spor ID'leri ile eşleştirme haritası
-const sportSheetMap = {
-  'ATLETİZM': 'atletizm',
-  'BADMİNTON': 'badminton',
-  'BİLEK GÜREŞİ': 'wrestling',
-  'DART': 'dart',
-  'GELENEKSEL TÜRK OKÇULUĞU': 'archery',
-  'GÜREŞ': 'gures',
-  'MASA TENİSİ': 'tableTennis',
-  'TAEKWONDO': 'taekwondo'
-};
-
-// Ana Sayfa Bileşeni
+// Derece Sayfası
 const DerecePage = () => {
   const [allResults, setAllResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSport, setSelectedSport] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 5;
 
   useEffect(() => {
     const loadExcelData = async () => {
@@ -46,34 +36,27 @@ const DerecePage = () => {
         const arrayBuffer = await response.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer, { type: 'array' });
         
+        console.log("Excel sayfaları:", workbook.SheetNames);
+        
         let allData = [];
         
-        // Her sekme için işleme yap
+        // Her sayfa için veri işleme
         workbook.SheetNames.forEach(sheetName => {
           console.log(`İşleniyor: ${sheetName}`);
           
-          // Spor türünü belirle
-          let sportId = null;
-          for (const key in sportSheetMap) {
-            if (sheetName.toUpperCase().includes(key) || key.includes(sheetName.toUpperCase())) {
-              sportId = sportSheetMap[key];
-              break;
-            }
-          }
-          
-          if (!sportId) return; // Eşleşme bulunamadıysa bu sekmeyi atla
-          
-          // Sekmedeki verileri al
+          // Sayfa verilerini al
           const sheet = workbook.Sheets[sheetName];
-          const rawData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+          const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
           
-          // Veriyi işle
-          const processedData = processSheetData(sportId, sheetName, rawData);
-          if (processedData.length > 0) {
-            allData = [...allData, ...processedData];
+          // Her spor için özel fonksiyon çağır
+          const sportData = processSheetData(sheetName, data);
+          
+          if (sportData.length > 0) {
+            allData = [...allData, ...sportData];
           }
         });
         
+        console.log("Toplam veri sayısı:", allData.length);
         setAllResults(allData);
       } catch (error) {
         console.error('Excel verisi yüklenirken hata:', error);
@@ -85,116 +68,106 @@ const DerecePage = () => {
     loadExcelData();
   }, []);
 
-  // Her branş için özel işleme fonksiyonu
-  const processSheetData = (sportId, sheetName, data) => {
-    const results = [];
+  // Excel sayfalarını işle
+  const processSheetData = (sheetName, data) => {
+    // Spor branşını belirle
+    let sportId = identifySport(sheetName);
+    if (!sportId) return [];
     
-    // Veri başlangıç indeksini bul
-    let startRow = 0;
-    for (let i = 0; i < data.length; i++) {
-      if (data[i] && data[i].includes('DERECE')) {
-        startRow = i + 1;
-        break;
-      }
-    }
+    const results = [];
+    const upperSheetName = sheetName.toUpperCase();
     
     // Başlık satırını bul
-    let headerRow = [];
+    let headerRowIndex = -1;
     for (let i = 0; i < data.length; i++) {
-      if (data[i] && data[i].includes('DERECE')) {
-        headerRow = data[i];
+      if (data[i] && data[i].includes && data[i].includes('DERECE')) {
+        headerRowIndex = i;
         break;
       }
     }
     
-    // İsim, okul ve kategori indekslerini bul
-    const nameIndex = headerRow.indexOf('AD-SOYAD') > -1 ? headerRow.indexOf('AD-SOYAD') : headerRow.indexOf('AD/SOYAD');
-    const schoolIndex = headerRow.indexOf('OKUL') > -1 ? headerRow.indexOf('OKUL') : headerRow.indexOf('OKUL ADI');
-    const categoryIndex = headerRow.indexOf('KATEGORİ');
-    const weightIndex = sportId === 'gures' || sportId === 'wrestling' ? headerRow.indexOf('KİLO') : -1;
+    if (headerRowIndex === -1) return [];
     
-    // Ana verileri işle
-    for (let i = startRow; i < data.length; i++) {
+    const headerRow = data[headerRowIndex];
+    const startRowIndex = headerRowIndex + 1;
+    
+    // Sütun indeksleri
+    const rankIndex = headerRow.indexOf('DERECE');
+    const nameIndex = headerRow.findIndex(h => h === 'AD-SOYAD' || h === 'AD/SOYAD');
+    const schoolIndex = headerRow.findIndex(h => h === 'OKUL' || h === 'OKUL ADI');
+    const categoryIndex = headerRow.indexOf('KATEGORİ');
+    const weightIndex = headerRow.indexOf('KİLO');
+    
+    // Bireysel dereceleri işle
+    for (let i = startRowIndex; i < data.length; i++) {
       const row = data[i];
       if (!row || row.length === 0) continue;
       
-      // Satır bir derece içeriyor mu kontrol et
-      const rank = row[0];
+      const rank = row[rankIndex];
       if (!rank || isNaN(rank) || rank === '') continue;
       
-      // Satır kategori veya takım tasnifi başlığı mı kontrol et
-      const rowText = row.join(' ').toUpperCase();
-      if (rowText.includes('TAKIM TASNİFİ') || rowText.includes('DERECE')) continue;
+      // Takım tasnifi satırlarını atla
+      const rowStr = String(row);
+      if (rowStr.includes('TAKIM TASNİFİ')) continue;
       
-      // Bireysel derece verisi
-      if (nameIndex > -1 && schoolIndex > -1) {
+      // Dart sayfası için özel işleme (AD-SOYAD sütunu yok)
+      if (upperSheetName.includes('DART')) {
         results.push({
           sport: sportId,
-          rank: rank.toString(),
+          rank: String(rank),
+          name: '',
+          school: row[schoolIndex] || '',
+          category: row[categoryIndex] || '',
+          isTeam: true
+        });
+      } 
+      // Normal veri işleme
+      else if (nameIndex > -1 && schoolIndex > -1) {
+        results.push({
+          sport: sportId,
+          rank: String(rank),
           name: row[nameIndex] || '',
           school: row[schoolIndex] || '',
-          category: categoryIndex > -1 ? row[categoryIndex] || '' : '',
+          category: row[categoryIndex] || '',
           weight: weightIndex > -1 ? row[weightIndex] || '' : '',
           isTeam: false
         });
       }
-      // Takım verisi (Dart gibi)
-      else if (schoolIndex > -1) {
-        results.push({
-          sport: sportId,
-          rank: rank.toString(),
-          name: '',
-          school: row[schoolIndex] || '',
-          category: categoryIndex > -1 ? row[categoryIndex] || '' : '',
-          isTeam: true
-        });
-      }
     }
     
-    // Takım tasnifi bölümlerini bul ve işle
-    if (sportId === 'gures' || sportId === 'taekwondo' || sportId === 'wrestling') {
+    // Takım tasnifi bölümlerini işle (Taekwondo ve Bilek Güreşi)
+    if (upperSheetName.includes('TAEKWONDO') || upperSheetName.includes('BİLEK GÜREŞİ')) {
       for (let i = 0; i < data.length; i++) {
         const row = data[i];
-        if (!row || row.length === 0) continue;
+        if (!row || !Array.isArray(row)) continue;
         
-        const rowText = row.join(' ').toUpperCase();
-        if (rowText.includes('TAKIM TASNİFİ')) {
+        const rowStr = row.join(' ');
+        if (rowStr.includes('TAKIM TASNİFİ')) {
+          // Kategoriyi belirle
           let category = '';
+          if (rowStr.includes('GENÇ')) category = 'GENÇ';
+          else if (rowStr.includes('YILDIZ')) category = 'YILDIZ';
           
-          // Kategori bilgisini belirle
-          if (rowText.includes('GENÇ')) {
-            category = 'GENÇ';
-          } else if (rowText.includes('YILDIZ')) {
-            category = 'YILDIZ';
-          }
+          if (rowStr.includes('KIZ')) category += ' KIZ';
+          else if (rowStr.includes('ERKEK')) category += ' ERKEK';
           
-          if (rowText.includes('KIZ')) {
-            category += ' KIZ';
-          } else if (rowText.includes('ERKEK')) {
-            category += ' ERKEK';
-          } else {
-            category += ' ERKEK'; // Varsayılan
-          }
-          
-          // Takım verilerini işle
-          let j = i + 2; // Başlıkları atla
+          // Takım tasnifi verilerini bul
+          let j = i + 2; // Başlık satırını atla
           while (j < data.length && data[j] && data[j].length > 1) {
             const teamRank = data[j][0];
-            if (!teamRank || isNaN(teamRank)) {
-              j++;
-              continue;
+            if (!isNaN(teamRank) && teamRank !== '') {
+              // Taekwondo için spor ID'sini belirle
+              const teamSportId = rowStr.includes('TAEKWONDO') ? 'taekwondo' : sportId;
+              
+              results.push({
+                sport: teamSportId,
+                rank: String(teamRank),
+                name: '',
+                school: data[j][1] || '',
+                category: `TAKIM ${category}`,
+                isTeam: true
+              });
             }
-            
-            results.push({
-              sport: sportId,
-              rank: teamRank.toString(),
-              name: '',
-              school: data[j][1] || '',
-              category: `TAKIM ${category}`,
-              isTeam: true,
-              puan: data[j][2] || ''
-            });
-            
             j++;
           }
         }
@@ -204,43 +177,88 @@ const DerecePage = () => {
     return results;
   };
 
-  // Verileri filtrele ve sayfalandır
-  const filteredResults = selectedSport === 'all' 
-    ? allResults 
-    : allResults.filter(result => result.sport === selectedSport);
-  
-  // Kategorilere göre grupla
-  const categories = [...new Set(filteredResults.map(item => item.category))].filter(Boolean);
-  const groupedByCategory = categories.map(category => ({
-    category,
-    winners: filteredResults.filter(winner => winner.category === category)
-  }));
-  
-  // Kategorileri takım ve bireysel olarak ayır ve sırala
-  const sortedCategories = [...groupedByCategory].sort((a, b) => {
-    const aIsTeam = a.category.includes('TAKIM');
-    const bIsTeam = b.category.includes('TAKIM');
-    return (aIsTeam ? 1 : 0) - (bIsTeam ? 1 : 0);
-  });
-  
-  // Sayfalama
-  useEffect(() => {
-    setTotalPages(Math.max(1, Math.ceil(sortedCategories.length / itemsPerPage)));
-    setCurrentPage(1); // Filtre değiştiğinde ilk sayfaya dön
-  }, [selectedSport, allResults]);
-  
-  const paginatedCategories = sortedCategories.slice(
-    (currentPage - 1) * itemsPerPage, 
-    currentPage * itemsPerPage
-  );
+  // Sayfa adından spor ID'sini belirle
+  const identifySport = (sheetName) => {
+    const upperName = sheetName.toUpperCase();
+    
+    if (upperName.includes('BADMİNTON')) return 'badminton';
+    if (upperName.includes('ATLETİZM')) return 'atletizm';
+    if (upperName.includes('TAEKWONDO')) return 'taekwondo';
+    if (upperName.includes('MASA TENİSİ')) return 'tableTennis';
+    if (upperName.includes('DART')) return 'dart';
+    if (upperName.includes('BİLEK GÜREŞİ')) return 'wrestling';
+    if (upperName.includes('GÜREŞ')) return 'gures';
+    if (upperName.includes('GELENEKSEL TÜRK OKÇULUĞU') || upperName.includes('OKÇULUK')) return 'archery';
+    
+    return null;
+  };
 
-  // Sayfa değiştirme fonksiyonu
+  // Verileri filtrele ve grupla
+  useEffect(() => {
+    // Spor dalına göre filtreleme
+    const filtered = selectedSport === 'all' 
+      ? allResults 
+      : allResults.filter(result => result.sport === selectedSport);
+    
+    // Kategorilere göre grupla
+    const categories = [...new Set(filtered.map(item => item.category))].filter(Boolean);
+    const grouped = categories.map(category => ({
+      category,
+      winners: filtered.filter(winner => winner.category === category)
+    }));
+    
+    // Takım ve bireysel kategorilerini sırala
+    const sorted = [...grouped].sort((a, b) => {
+      const aIsTeam = a.category.includes('TAKIM');
+      const bIsTeam = b.category.includes('TAKIM');
+      return (aIsTeam ? 1 : 0) - (bIsTeam ? 1 : 0);
+    });
+    
+    // Toplam sayfa sayısını hesapla
+    setTotalPages(Math.max(1, Math.ceil(sorted.length / ITEMS_PER_PAGE)));
+    
+    // Filtre değiştiğinde ilk sayfaya dön
+    setCurrentPage(1);
+  }, [selectedSport, allResults]);
+
+  // Filtrelenmiş ve sayfalandırılmış verileri hesapla
+  const getFilteredAndPaginatedData = () => {
+    // Spor dalına göre filtreleme
+    const filtered = selectedSport === 'all' 
+      ? allResults 
+      : allResults.filter(result => result.sport === selectedSport);
+    
+    // Kategorilere göre grupla
+    const categories = [...new Set(filtered.map(item => item.category))].filter(Boolean);
+    const grouped = categories.map(category => ({
+      category,
+      winners: filtered.filter(winner => winner.category === category)
+    }));
+    
+    // Takım ve bireysel kategorilerini sırala
+    const sorted = [...grouped].sort((a, b) => {
+      const aIsTeam = a.category.includes('TAKIM');
+      const bIsTeam = b.category.includes('TAKIM');
+      return (aIsTeam ? 1 : 0) - (bIsTeam ? 1 : 0);
+    });
+    
+    // Sayfalama
+    return sorted.slice(
+      (currentPage - 1) * ITEMS_PER_PAGE, 
+      currentPage * ITEMS_PER_PAGE
+    );
+  };
+  
+  // Sayfa değiştirme
   const changePage = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
       window.scrollTo(0, 0);
     }
   };
+  
+  // Filtrelenmiş ve sayfalandırılmış veriler
+  const paginatedCategories = getFilteredAndPaginatedData();
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 min-h-screen">
@@ -285,8 +303,8 @@ const DerecePage = () => {
           ) : (
             <>
               {/* Kategori Bölümleri */}
-              {paginatedCategories.map((group) => (
-                <div key={group.category} className="my-6">
+              {paginatedCategories.map((group, index) => (
+                <div key={index} className="my-6">
                   <h2 className={`text-xl font-bold text-gray-800 py-2 px-4 bg-white rounded-lg shadow-sm border-l-4 
                     ${group.category.includes('TAKIM') ? 'border-blue-500' : 'border-red-500'} mb-4`}
                   >
@@ -303,10 +321,12 @@ const DerecePage = () => {
                       <div key={idx} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all">
                         <div className="flex items-center gap-4">
                           <div className={`w-12 h-12 flex items-center justify-center text-lg font-bold text-white rounded-full 
-                            ${winner.rank === '1' ? "bg-yellow-400" : 
+                            ${
+                              winner.rank === '1' ? "bg-yellow-400" : 
                               winner.rank === '2' ? "bg-gray-400" : 
                               winner.rank === '3' ? "bg-orange-600" : 
-                              winner.rank === '4' ? "bg-gray-600" : "bg-gray-500"}`}
+                              winner.rank === '4' ? "bg-gray-600" : "bg-gray-500"
+                            }`}
                           >
                             {winner.rank}
                           </div>
@@ -320,9 +340,6 @@ const DerecePage = () => {
                             )}
                             {winner.weight && (
                               <p className="text-gray-600 text-xs">{winner.weight}</p>
-                            )}
-                            {winner.puan && (
-                              <p className="text-gray-600 text-xs font-bold">Puan: {winner.puan}</p>
                             )}
                           </div>
                         </div>
