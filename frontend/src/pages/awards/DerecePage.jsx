@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 // Spor dalları tanımı
 const sports = [
-  { id: 'all', title: 'Tüm Branşlar', icon: '🏆' },
   { id: 'archery', title: 'Okçuluk', icon: '🏹' },
   { id: 'badminton', title: 'Badminton', icon: '🏸' },
   { id: 'atletizm', title: 'Atletizm', icon: '🏃' },
@@ -17,7 +16,7 @@ const sports = [
 const DerecePage = () => {
   const [allResults, setAllResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSport, setSelectedSport] = useState('all');
+  const [selectedSport, setSelectedSport] = useState('archery');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const ITEMS_PER_PAGE = 5;
