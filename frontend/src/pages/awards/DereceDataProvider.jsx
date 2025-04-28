@@ -6,13 +6,21 @@ export const sports = [
     { id: 'taekwondo', title: 'Taekwondo', icon: '🥋' },
     { id: 'tableTennis', title: 'Masa Tenisi', icon: '🏓' },
     { id: 'dart', title: 'Dart', icon: '🎯' },
+    { id: 'badminton', title: 'Badminton', icon: '🎯' },
+    { id: 'atletizm', title: 'Atletizm', icon: '🎯' },
+    { id: 'wrestling', title: 'Bilek Güreşi', icon: '🎯' },
+    { id: 'gures', title: 'Güreş', icon: '🎯' },
   ];
 
 const sportSheetMap = {
   'GELENEKSEL TÜRK OKÇULUĞU': 'archery',
   'DART': 'dart',
   'TAEKWONDO': 'taekwondo',
-  'MASA TENİSİ': 'tableTennis'
+  'MASA TENİSİ': 'tableTennis',
+  'BADMİNTON': 'badminton',
+  'ATLETİZM': 'atletizm',
+  'Bilek Güreşi': 'wrestling',
+  'Güreş': 'gures'
 };
 
 const processSheetData = (sheetName, data) => {
