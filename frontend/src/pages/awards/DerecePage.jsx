@@ -619,7 +619,7 @@ const getTaekwondoData = () => [
 ];
 
   return (
-    <div className="max-w-6xl mx-auto py-8 pt-10 px-4 min-h-screen">
+    <div className="max-w-6xl mx-auto py-8 mt-10 px-4 min-h-screen">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           <span className="relative z-10 inline-block">
