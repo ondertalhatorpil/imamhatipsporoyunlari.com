@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTrophy, FaCalendarAlt, FaClock, FaVolleyballBall, FaFutbol, FaUsers } from 'react-icons/fa';
+import { FaTrophy, FaCalendarAlt, FaClock, FaVolleyballBall, FaFutbol, FaMapMarkerAlt } from 'react-icons/fa';
 import { MdSportsSoccer } from 'react-icons/md';
 
 const TournamentFinal = () => {
@@ -7,6 +7,7 @@ const TournamentFinal = () => {
     {
       date: '08.05.2025',
       category: 'GENÇ KIZ',
+      venue: 'Cevizlibağ Atatürk Öğrenci Yurdu',
       matches: [
         {
           time: '10:00',
@@ -23,6 +24,7 @@ const TournamentFinal = () => {
     {
       date: '08.05.2025',
       category: 'YILDIZ KIZ',
+      venue: 'Cevizlibağ Atatürk Öğrenci Yurdu',
       matches: [
         {
           time: '12:00',
@@ -42,27 +44,29 @@ const TournamentFinal = () => {
     {
       date: '07.05.2025',
       category: 'GENÇ ERKEK',
+      venue: 'Fatih UFSM Anadolu İmam Hatip Lisesi',
       matches: [
         {
           time: '10:00',
           team1: 'İTO MARMARA AİHL',
-          team2: 'RAKİP BEKLENİYOR...'
+          team2: 'FATİH UFSM AİHL'
         },
         {
           time: '11:00',
           team1: 'YAVUZ BAHADIROĞLU AİHL',
-          team2: 'RAKİP BEKLENİYOR...'
+          team2: 'YAŞAR DEDEMAN AİHL'
         }
       ]
     },
     {
       date: '07.05.2025',
       category: 'YILDIZ ERKEK',
+      venue: 'Fatih UFSM Anadolu İmam Hatip Lisesi',
       matches: [
         {
           time: '12:00',
           team1: 'ANAFARTALAR İHO',
-          team2: 'RAKİP BEKLENİYOR...'
+          team2: 'ŞEHİT MUHAMMET AMBAR İHO'
         },
         {
           time: '13:00',
@@ -110,7 +114,7 @@ const TournamentFinal = () => {
   const SportSection = ({ title, icon, sport, matches }) => (
     <div className="mb-12 sm:mb-16">
       <div className="flex items-center mb-6 sm:mb-8">
-        <div className="rounded-full bg-[#E84049] bg-opacity-10">
+        <div className="rounded-full bg-[#E84049] bg-opacity-10 p-3">
           {icon}
         </div>
         <h2 className="text-lg sm:text-2xl font-bold text-[#E84049] ml-2 sm:ml-3">{title}</h2>
@@ -125,6 +129,12 @@ const TournamentFinal = () => {
             <span className="border-2 border-[#E84049] text-[#E84049] px-2 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold mt-2 sm:mt-0">
               {matchDay.category}
             </span>
+          </div>
+          
+          {/* Venue Information */}
+          <div className="flex items-center mb-4 pl-0 sm:pl-8">
+            <FaMapMarkerAlt className="text-[#E84049] mr-2 text-base sm:text-lg flex-shrink-0" />
+            <span className="text-sm sm:text-base text-gray-700 font-medium">{matchDay.venue}</span>
           </div>
           
           <div className="pl-0 sm:pl-8">
@@ -154,20 +164,20 @@ const TournamentFinal = () => {
           </div>
         </div>
 
-        {/* Voleybol Section */}
-        <SportSection 
-          title="VOLEYBOL YARI FİNALLER"
-          icon={<FaVolleyballBall className="text-[#E84049] text-2xl sm:text-3xl" />}
-          sport="volleyball"
-          matches={volleyballMatches}
-        />
-
-        {/* Futsal Section */}
+        {/* Futsal Section - Shows first since it's on May 7 */}
         <SportSection 
           title="FUTSAL YARI FİNALLER"
           icon={<MdSportsSoccer className="text-[#E84049] text-2xl sm:text-3xl" />}
           sport="futsal"
           matches={futsalMatches}
+        />
+
+        {/* Voleybol Section - Shows second since it's on May 8 */}
+        <SportSection 
+          title="VOLEYBOL YARI FİNALLER"
+          icon={<FaVolleyballBall className="text-[#E84049] text-2xl sm:text-3xl" />}
+          sport="volleyball"
+          matches={volleyballMatches}
         />
 
       </div>
