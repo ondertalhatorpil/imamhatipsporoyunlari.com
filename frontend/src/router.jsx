@@ -21,6 +21,7 @@ import TournamentManagement from './admin/pages/TournamentManagement';
 // Layouts
 import MainLayout from './layouts/MainLayout';
 import AdminLayout from './layouts/AdminLayout';
+import TournamentFinal from './pages/TournamentFinal';
 
 const AppRoutes = () => {
   return (
@@ -33,7 +34,7 @@ const AppRoutes = () => {
         <Route path="/dereceye-girenler" element={<Awards />} />
         <Route path="/instructions" element={<Instructions />} />
         <Route path="/turnuva" element={<Tournament />} />
-
+        <Route path="/turnuva-final-asamasi" element={<TournamentFinal />} />
       </Route>
       
       {/* Admin sayfaları - AdminLayout ile */}
