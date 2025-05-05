@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { tournamentService } from '../services/api';
 import MatchCard from '../components/Tournament/MatchCard';
 
+import { FaTrophy } from 'react-icons/fa'
+
 const Tournament = () => {
     const [tournaments, setTournaments] = useState([]);
     const [selectedTournament, setSelectedTournament] = useState(null);
@@ -98,8 +100,8 @@ const Tournament = () => {
                 </span>
             </h1>
 
-            <div className="flex justify-center mb-8">                 
-    <div className="flex items-center rounded-lg shadow-md border border-gray-200 bg-white overflow-hidden">                     
+            <div className="flex flex-col-reverse sm:flex-row justify-center items-center gap-3 mb-8">                 
+    <div className="w-full sm:w-auto flex items-center rounded-lg shadow-md border border-gray-200 bg-white overflow-hidden">                     
         <div className="px-4 py-2 text-white font-medium" style={{ backgroundColor: mainColor }}>                         
             Turnuva                     
         </div>                     
@@ -126,9 +128,10 @@ const Tournament = () => {
         href="https://imamhatipsporoyunlari.com/turnuva-final-asamasi"
         target="_blank"
         rel="noopener noreferrer"
-        className="ml-3 px-6 py-2 text-white font-medium rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
+        className="w-full sm:w-auto text-center px-6 py-2 text-white font-medium rounded-lg shadow-md transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2"
         style={{ backgroundColor: mainColor }}
     >
+        <FaTrophy className="text-lg" />
         Yarı Finaller
     </a>
 </div>
