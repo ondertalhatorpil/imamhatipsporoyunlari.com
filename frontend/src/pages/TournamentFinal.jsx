@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTrophy, FaCalendarAlt, FaClock, FaVolleyballBall, FaFutbol, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaTrophy, FaCalendarAlt, FaClock, FaVolleyballBall, FaFutbol, FaUsers, FaMapMarkerAlt } from 'react-icons/fa';
 import { MdSportsSoccer } from 'react-icons/md';
 
 const TournamentFinal = () => {
@@ -78,33 +78,44 @@ const TournamentFinal = () => {
   ];
 
   const MatchCard = ({ match, sport }) => (
-    <div className="bg-white rounded-lg shadow-lg p-3 sm:p-6 mb-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center text-[#E84049] text-base sm:text-lg font-bold">
-          <FaClock className="mr-1 sm:mr-2" />
-          {match.time}
-        </div>
-        {sport === 'volleyball' ? (
-          <FaVolleyballBall className="text-[#E84049] text-xl sm:text-2xl" />
-        ) : (
-          <FaFutbol className="text-[#E84049] text-xl sm:text-2xl" />
-        )}
-      </div>
-      
-      <div className="mt-4 flex flex-col sm:flex-row items-center sm:justify-between gap-4">
-        <div className="w-full sm:flex-1 text-center">
-          <div className="text-sm sm:text-lg font-semibold text-gray-800 break-words">{match.team1}</div>
-        </div>
-        
-        <div className="mx-4 text-center">
-          <div className="bg-[#E84049] text-white px-4 sm:px-6 py-1 sm:py-2 rounded-full font-bold text-sm sm:text-base">
-            VS
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-4 border border-[#E84049] border-opacity-10">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+        {/* Time and Sport Icon */}
+        <div className="flex-shrink-0 flex items-center gap-3">
+          <div className="bg-[#E84049] text-white px-3 py-1.5 rounded-lg font-bold flex items-center gap-2">
+            <FaClock className="text-sm" />
+            <span>{match.time}</span>
           </div>
+          {sport === 'volleyball' ? (
+            <FaVolleyballBall className="text-[#E84049] text-xl hidden sm:block" />
+          ) : (
+            <FaFutbol className="text-[#E84049] text-xl hidden sm:block" />
+          )}
         </div>
         
-        <div className="w-full sm:flex-1 text-center">
-          <div className={`text-sm sm:text-lg font-semibold break-words ${match.team2 === 'RAKİP BEKLENİYOR...' ? 'text-[#E84049] italic animate-pulse' : 'text-gray-800'}`}>
-            {match.team2}
+        {/* Teams Section */}
+        <div className="flex-grow flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex-1 text-center sm:text-left">
+            <div className="text-sm sm:text-base font-semibold text-gray-800 break-words bg-gray-50 py-3 px-4 rounded-lg">
+              {match.team1}
+            </div>
+          </div>
+          
+          <div className="flex-shrink-0">
+            <div className="bg-[#E84049] text-white px-4 sm:px-6 py-2 rounded-lg font-bold text-sm sm:text-base flex items-center gap-2">
+              <span>VS</span>
+              {sport === 'volleyball' ? (
+                <FaVolleyballBall className="text-sm sm:hidden" />
+              ) : (
+                <FaFutbol className="text-sm sm:hidden" />
+              )}
+            </div>
+          </div>
+          
+          <div className="flex-1 text-center sm:text-right">
+            <div className={`text-sm sm:text-base font-semibold break-words py-3 px-4 rounded-lg ${match.team2 === 'RAKİP BEKLENİYOR...' ? 'text-[#E84049] bg-[#E84049] bg-opacity-5 italic animate-pulse' : 'text-gray-800 bg-gray-50'}`}>
+              {match.team2}
+            </div>
           </div>
         </div>
       </div>
@@ -113,28 +124,32 @@ const TournamentFinal = () => {
 
   const SportSection = ({ title, icon, sport, matches }) => (
     <div className="mb-12 sm:mb-16">
-      <div className="flex items-center mb-6 sm:mb-8">
-        <div className="rounded-full bg-[#E84049] bg-opacity-10 p-3">
+      <div className="flex items-center mb-6 sm:mb-8 bg-[#E84049] bg-opacity-5 rounded-xl p-4">
+        <div className="rounded-xl bg-[#E84049] bg-opacity-10 p-2.5">
           {icon}
         </div>
-        <h2 className="text-lg sm:text-2xl font-bold text-[#E84049] ml-2 sm:ml-3">{title}</h2>
+        <h2 className="text-lg sm:text-2xl font-bold text-[#E84049] ml-3 sm:ml-4">{title}</h2>
       </div>
       
       {matches.map((matchDay, idx) => (
         <div key={idx} className="mb-8 sm:mb-12">
-          <div className="flex flex-wrap items-center mb-4 sm:mb-6 gap-2">
-            <FaCalendarAlt className="text-[#E84049] mr-1 sm:mr-2 text-base sm:text-xl" />
-            <span className="text-base sm:text-lg font-semibold text-[#E84049]">{matchDay.date}</span>
-            <div className="hidden sm:block mx-4 h-1 w-12 bg-[#E84049] bg-opacity-30"></div>
-            <span className="border-2 border-[#E84049] text-[#E84049] px-2 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold mt-2 sm:mt-0">
+          <div className="flex flex-wrap items-center mb-6 gap-3">
+            <div className="flex items-center gap-2 bg-[#E84049] bg-opacity-10 px-4 py-2 rounded-lg">
+              <FaCalendarAlt className="text-[#E84049] text-base sm:text-lg" />
+              <span className="text-base sm:text-lg font-semibold text-[#E84049]">{matchDay.date}</span>
+            </div>
+            <div className="hidden sm:block h-6 w-px bg-[#E84049] bg-opacity-30"></div>
+            <span className="bg-[#E84049] text-white px-4 py-2 rounded-lg text-sm sm:text-base font-semibold">
               {matchDay.category}
             </span>
           </div>
           
           {/* Venue Information */}
-          <div className="flex items-center mb-4 pl-0 sm:pl-8">
-            <FaMapMarkerAlt className="text-[#E84049] mr-2 text-base sm:text-lg flex-shrink-0" />
-            <span className="text-sm sm:text-base text-gray-700 font-medium">{matchDay.venue}</span>
+          <div className="bg-[#E84049] bg-opacity-5 rounded-lg p-3 sm:p-4 mb-4 ml-0 sm:ml-8">
+            <div className="flex items-center gap-2">
+              <FaMapMarkerAlt className="text-[#E84049] text-base sm:text-lg flex-shrink-0" />
+              <span className="text-sm sm:text-base text-[#E84049] font-medium">{matchDay.venue}</span>
+            </div>
           </div>
           
           <div className="pl-0 sm:pl-8">
