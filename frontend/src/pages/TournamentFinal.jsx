@@ -122,12 +122,12 @@ const TournamentFinal = () => {
 
   const SportSection = ({ title, icon, sport, matches }) => (
     <div className="mb-10 sm:mb-16">
-      <div className="bg-[#E84049] rounded-lg p-3 sm:p-4 mb-6 sm:mb-8">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-3 sm:p-4 mb-6 sm:mb-8">
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white bg-opacity-15 flex items-center justify-center">
-            {icon}
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#E84049] flex items-center justify-center">
+            {React.cloneElement(icon, { className: 'text-white text-lg sm:text-xl' })}
           </div>
-          <h2 className="text-base sm:text-xl font-semibold text-white">{title}</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-[#E84049]">{title}</h2>
         </div>
       </div>
       
@@ -136,18 +136,18 @@ const TournamentFinal = () => {
           <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
             <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
               <FaCalendarAlt className="text-[#E84049] text-sm" />
-              <span className="text-sm font-medium text-[#E84049]">{matchDay.date}</span>
+              <span className="text-sm font-bold text-[#E84049]">{matchDay.date}</span>
             </div>
-            <div className="h-1 w-1 rounded-full bg-[#E84049] bg-opacity-20 hidden sm:block"></div>
-            <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium">
+            <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
+            <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
               {matchDay.category}
             </span>
           </div>
           
-          <div className="bg-[#E84049] bg-opacity-5 rounded-lg px-3 py-2 mb-4 sm:mb-6">
+          <div className="bg-white rounded-lg shadow-sm border border-[#E84049] border-opacity-20 px-3 py-2 mb-4 sm:mb-6">
             <div className="flex items-center gap-1.5">
               <FaMapMarkerAlt className="text-[#E84049] text-sm flex-shrink-0" />
-              <span className="text-sm text-[#E84049] font-medium">{matchDay.venue}</span>
+              <span className="text-sm text-[#E84049] font-bold">{matchDay.venue}</span>
             </div>
           </div>
           
