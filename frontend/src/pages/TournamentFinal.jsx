@@ -78,39 +78,42 @@ const TournamentFinal = () => {
   ];
 
   const MatchCard = ({ match, sport }) => (
-    <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 mb-4 border border-gray-200">
-      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-        {/* Time and Sport Icon */}
-        <div className="flex-shrink-0 flex items-center gap-3">
-          <div className="bg-[#E84049] text-white px-3 py-1.5 rounded-lg font-medium flex items-center gap-2">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 px-3 sm:px-6 py-3 sm:py-4 mb-3">
+      <div className="flex flex-col sm:flex-row items-center gap-3">
+        {/* Time */}
+        <div className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2">
+          <div className="flex items-center gap-1.5 bg-[#E84049] text-white px-3 py-1 rounded-lg text-sm">
             <FaClock className="text-sm" />
             <span>{match.time}</span>
           </div>
           {sport === 'volleyball' ? (
-            <FaVolleyballBall className="text-[#E84049] text-xl hidden sm:block" />
+            <FaVolleyballBall className="text-[#E84049] text-lg sm:hidden" />
           ) : (
-            <FaFutbol className="text-[#E84049] text-xl hidden sm:block" />
+            <FaFutbol className="text-[#E84049] text-lg sm:hidden" />
+          )}
+          {sport === 'volleyball' ? (
+            <FaVolleyballBall className="text-[#E84049] text-lg hidden sm:block" />
+          ) : (
+            <FaFutbol className="text-[#E84049] text-lg hidden sm:block" />
           )}
         </div>
         
-        {/* Teams Section */}
-        <div className="flex-grow flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex-1 text-center sm:text-left">
-            <div className="text-sm sm:text-lg font-medium text-gray-900 px-2">
-              {match.team1}
-            </div>
+        {/* Teams */}
+        <div className="w-full sm:flex-1 flex flex-col sm:flex-row items-center gap-3">
+          <div className="w-full sm:flex-1 text-center sm:text-left text-sm sm:text-base font-medium text-gray-900 break-words">
+            {match.team1}
           </div>
           
-          <div className="flex-shrink-0">
-            <div className="bg-[#E84049] text-white px-4 py-1.5 rounded-lg font-bold text-sm sm:text-base">
+          <div className="flex items-center justify-center">
+            <div className="bg-[#E84049] text-white px-3 py-1 rounded-md text-sm font-medium">
               VS
             </div>
           </div>
           
-          <div className="flex-1 text-center sm:text-right">
-            <div className={`text-sm sm:text-lg font-medium px-2 ${match.team2 === 'RAKİP BEKLENİYOR...' ? 'text-[#E84049] italic animate-pulse' : 'text-gray-900'}`}>
-              {match.team2}
-            </div>
+          <div className={`w-full sm:flex-1 text-center sm:text-right text-sm sm:text-base font-medium break-words ${
+            match.team2 === 'RAKİP BEKLENİYOR...' ? 'text-[#E84049] italic' : 'text-gray-900'
+          }`}>
+            {match.team2}
           </div>
         </div>
       </div>
@@ -118,36 +121,37 @@ const TournamentFinal = () => {
   );
 
   const SportSection = ({ title, icon, sport, matches }) => (
-    <div className="mb-12 sm:mb-16">
-      <div className="flex items-center mb-6 sm:mb-8 bg-[#E84049] rounded-xl p-4">
-        <div className="rounded-xl bg-white bg-opacity-20 p-2.5">
-          {icon}
+    <div className="mb-10 sm:mb-16">
+      <div className="bg-[#E84049] rounded-lg p-3 sm:p-4 mb-6 sm:mb-8">
+        <div className="flex items-center gap-3">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white bg-opacity-15 flex items-center justify-center">
+            {icon}
+          </div>
+          <h2 className="text-base sm:text-xl font-semibold text-white">{title}</h2>
         </div>
-        <h2 className="text-lg sm:text-2xl font-bold text-white ml-3 sm:ml-4">{title}</h2>
       </div>
       
       {matches.map((matchDay, idx) => (
-        <div key={idx} className="mb-8 sm:mb-12">
-          <div className="flex flex-wrap items-center mb-6 gap-3">
-            <div className="flex items-center gap-2 bg-[#E84049] px-4 py-2 rounded-lg">
-              <FaCalendarAlt className="text-white text-base sm:text-lg" />
-              <span className="text-base sm:text-lg font-medium text-white">{matchDay.date}</span>
+        <div key={idx} className="mb-6 sm:mb-8">
+          <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
+            <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
+              <FaCalendarAlt className="text-[#E84049] text-sm" />
+              <span className="text-sm font-medium text-[#E84049]">{matchDay.date}</span>
             </div>
-            <div className="hidden sm:block h-6 w-px bg-[#E84049] bg-opacity-20"></div>
-            <span className="bg-[#E84049] text-white px-4 py-2 rounded-lg text-sm sm:text-base font-medium">
+            <div className="h-1 w-1 rounded-full bg-[#E84049] bg-opacity-20 hidden sm:block"></div>
+            <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium">
               {matchDay.category}
             </span>
           </div>
           
-          {/* Venue Information */}
-          <div className="bg-[#E84049] rounded-lg p-3 sm:p-4 mb-6 sm:mb-8">
-            <div className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-white text-base sm:text-lg flex-shrink-0" />
-              <span className="text-sm sm:text-base text-white font-medium">{matchDay.venue}</span>
+          <div className="bg-[#E84049] bg-opacity-5 rounded-lg px-3 py-2 mb-4 sm:mb-6">
+            <div className="flex items-center gap-1.5">
+              <FaMapMarkerAlt className="text-[#E84049] text-sm flex-shrink-0" />
+              <span className="text-sm text-[#E84049] font-medium">{matchDay.venue}</span>
             </div>
           </div>
           
-          <div className="pl-0 sm:pl-8">
+          <div>
             {matchDay.matches.map((match, mIdx) => (
               <MatchCard key={mIdx} match={match} sport={sport} />
             ))}
@@ -158,34 +162,34 @@ const TournamentFinal = () => {
   );
 
   return (
-    <div className="min-h-screen py-8 sm:py-12 px-4 sm:px-6 lg:px-8 mt-16 sm:mt-24">
+    <div className="min-h-screen py-6 sm:py-12 px-3 sm:px-6 lg:px-8 mt-12 sm:mt-20">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16 relative">
+        <div className="text-center mb-8 sm:mb-12 relative">
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 sm:-translate-y-10">
-            <FaTrophy className="text-yellow-400 text-4xl sm:text-6xl animate-bounce" />
+            <FaTrophy className="text-yellow-400 text-3xl sm:text-5xl animate-bounce" />
           </div>
           
-          <div className="relative inline-block mt-8 sm:mt-10">
-            <h1 className="text-2xl sm:text-4xl font-bold text-[#E84049] mb-4 sm:mb-6 relative z-10">
-              YARI FİNALLER BAŞLIYOR
+          <div className="relative inline-block mt-6 sm:mt-8">
+            <h1 className="text-2xl sm:text-4xl font-bold text-[#E84049] mb-3 sm:mb-6 relative z-10">
+              YARI FİNALLER
             </h1>
-            <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-4 sm:h-6 bg-[#E84049] opacity-20 rounded-lg transform -skew-x-12 z-0"></div>
+            <div className="absolute -bottom-1 left-0 w-full h-3 sm:h-4 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
         </div>
 
-        {/* Futsal Section - Shows first since it's on May 7 */}
+        {/* Futsal Section */}
         <SportSection 
-          title="FUTSAL YARI FİNALLER"
-          icon={<MdSportsSoccer className="text-[#E84049] text-2xl sm:text-3xl" />}
+          title="FUTSAL"
+          icon={<MdSportsSoccer className="text-white text-lg sm:text-xl" />}
           sport="futsal"
           matches={futsalMatches}
         />
 
-        {/* Voleybol Section - Shows second since it's on May 8 */}
+        {/* Voleybol Section */}
         <SportSection 
-          title="VOLEYBOL YARI FİNALLER"
-          icon={<FaVolleyballBall className="text-[#E84049] text-2xl sm:text-3xl" />}
+          title="VOLEYBOL" 
+          icon={<FaVolleyballBall className="text-white text-lg sm:text-xl" />}
           sport="volleyball"
           matches={volleyballMatches}
         />
