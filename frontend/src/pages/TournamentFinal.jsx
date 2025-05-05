@@ -74,32 +74,32 @@ const TournamentFinal = () => {
   ];
 
   const MatchCard = ({ match, sport }) => (
-    <div className="bg-white rounded-lg shadow-lg p-6 mb-4">
+    <div className="bg-white rounded-lg shadow-lg p-3 sm:p-6 mb-4">
       <div className="flex items-center justify-between">
-        <div className="flex items-center text-[#E84049] text-lg font-bold">
-          <FaClock className="mr-2" />
+        <div className="flex items-center text-[#E84049] text-base sm:text-lg font-bold">
+          <FaClock className="mr-1 sm:mr-2" />
           {match.time}
         </div>
         {sport === 'volleyball' ? (
-          <FaVolleyballBall className="text-[#E84049] text-2xl" />
+          <FaVolleyballBall className="text-[#E84049] text-xl sm:text-2xl" />
         ) : (
-          <FaFutbol className="text-[#E84049] text-2xl" />
+          <FaFutbol className="text-[#E84049] text-xl sm:text-2xl" />
         )}
       </div>
       
-      <div className="mt-4 flex items-center justify-between">
-        <div className="flex-1 text-center">
-          <div className="text-lg font-semibold text-gray-800">{match.team1}</div>
+      <div className="mt-4 flex flex-col sm:flex-row items-center sm:justify-between gap-4">
+        <div className="w-full sm:flex-1 text-center">
+          <div className="text-sm sm:text-lg font-semibold text-gray-800 break-words">{match.team1}</div>
         </div>
         
         <div className="mx-4 text-center">
-          <div className="bg-[#E84049] text-white px-6 py-2 rounded-full font-bold">
+          <div className="bg-[#E84049] text-white px-4 sm:px-6 py-1 sm:py-2 rounded-full font-bold text-sm sm:text-base">
             VS
           </div>
         </div>
         
-        <div className="flex-1 text-center">
-          <div className={`text-lg font-semibold ${match.team2 === 'RAKİP BEKLENİYOR...' ? 'text-[#E84049] italic animate-pulse' : 'text-gray-800'}`}>
+        <div className="w-full sm:flex-1 text-center">
+          <div className={`text-sm sm:text-lg font-semibold break-words ${match.team2 === 'RAKİP BEKLENİYOR...' ? 'text-[#E84049] italic animate-pulse' : 'text-gray-800'}`}>
             {match.team2}
           </div>
         </div>
@@ -108,26 +108,26 @@ const TournamentFinal = () => {
   );
 
   const SportSection = ({ title, icon, sport, matches }) => (
-    <div className="mb-16">
-      <div className="flex items-center mb-8">
+    <div className="mb-12 sm:mb-16">
+      <div className="flex items-center mb-6 sm:mb-8">
         <div className="rounded-full bg-[#E84049] bg-opacity-10">
           {icon}
         </div>
-        <h2 className="text-2xl font-bold text-[#E84049] ml-3">{title}</h2>
+        <h2 className="text-lg sm:text-2xl font-bold text-[#E84049] ml-2 sm:ml-3">{title}</h2>
       </div>
       
       {matches.map((matchDay, idx) => (
-        <div key={idx} className="mb-12">
-          <div className="flex items-center mb-6">
-            <FaCalendarAlt className="text-[#E84049] mr-2 text-xl" />
-            <span className="text-lg font-semibold text-[#E84049]">{matchDay.date}</span>
-            <div className="mx-4 h-1 w-12 bg-[#E84049] bg-opacity-30"></div>
-            <span className="border-2 border-[#E84049] text-[#E84049] px-4 py-1 rounded-full text-sm font-semibold">
+        <div key={idx} className="mb-8 sm:mb-12">
+          <div className="flex flex-wrap items-center mb-4 sm:mb-6 gap-2">
+            <FaCalendarAlt className="text-[#E84049] mr-1 sm:mr-2 text-base sm:text-xl" />
+            <span className="text-base sm:text-lg font-semibold text-[#E84049]">{matchDay.date}</span>
+            <div className="hidden sm:block mx-4 h-1 w-12 bg-[#E84049] bg-opacity-30"></div>
+            <span className="border-2 border-[#E84049] text-[#E84049] px-2 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold mt-2 sm:mt-0">
               {matchDay.category}
             </span>
           </div>
           
-          <div className="pl-8">
+          <div className="pl-0 sm:pl-8">
             {matchDay.matches.map((match, mIdx) => (
               <MatchCard key={mIdx} match={match} sport={sport} />
             ))}
@@ -138,26 +138,26 @@ const TournamentFinal = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-24">
+    <div className="min-h-screen py-8 sm:py-12 px-4 sm:px-6 lg:px-8 mt-16 sm:mt-24">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 relative">
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-10">
-            <FaTrophy className="text-yellow-400 text-6xl animate-bounce" />
+        <div className="text-center mb-12 sm:mb-16 relative">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 sm:-translate-y-10">
+            <FaTrophy className="text-yellow-400 text-4xl sm:text-6xl animate-bounce" />
           </div>
           
-          <div className="relative inline-block mt-10">
-            <h1 className="text-4xl font-bold text-[#E84049] mb-6 relative z-10">
+          <div className="relative inline-block mt-8 sm:mt-10">
+            <h1 className="text-2xl sm:text-4xl font-bold text-[#E84049] mb-4 sm:mb-6 relative z-10">
               FİNALLER BAŞLIYOR
             </h1>
-            <div className="absolute -bottom-2 left-0 w-full h-6 bg-[#E84049] opacity-20 rounded-lg transform -skew-x-12 z-0"></div>
+            <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-4 sm:h-6 bg-[#E84049] opacity-20 rounded-lg transform -skew-x-12 z-0"></div>
           </div>
         </div>
 
         {/* Voleybol Section */}
         <SportSection 
           title="VOLEYBOL YARI FİNALLER"
-          icon={<FaVolleyballBall className="text-[#E84049] text-3xl" />}
+          icon={<FaVolleyballBall className="text-[#E84049] text-2xl sm:text-3xl" />}
           sport="volleyball"
           matches={volleyballMatches}
         />
@@ -165,7 +165,7 @@ const TournamentFinal = () => {
         {/* Futsal Section */}
         <SportSection 
           title="FUTSAL YARI FİNALLER"
-          icon={<MdSportsSoccer className="text-[#E84049] text-3xl" />}
+          icon={<MdSportsSoccer className="text-[#E84049] text-2xl sm:text-3xl" />}
           sport="futsal"
           matches={futsalMatches}
         />
