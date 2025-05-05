@@ -148,7 +148,7 @@ const TournamentFinal = () => {
           
           <div className="relative inline-block mt-8 sm:mt-10">
             <h1 className="text-2xl sm:text-4xl font-bold text-[#E84049] mb-4 sm:mb-6 relative z-10">
-              FİNALLER BAŞLIYOR
+              YARI FİNALLER BAŞLIYOR
             </h1>
             <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-4 sm:h-6 bg-[#E84049] opacity-20 rounded-lg transform -skew-x-12 z-0"></div>
           </div>

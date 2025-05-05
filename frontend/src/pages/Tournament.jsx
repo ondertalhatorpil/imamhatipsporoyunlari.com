@@ -98,29 +98,40 @@ const Tournament = () => {
                 </span>
             </h1>
 
-            <div className="flex justify-center mb-8">
-                <div className="flex items-center rounded-lg shadow-md border border-gray-200 bg-white overflow-hidden">
-                    <div className="px-4 py-2 text-white font-medium" style={{ backgroundColor: mainColor }}>
-                        Turnuva
-                    </div>
-                    <select
-                        id="tournament-select"
-                        value={selectedTournament || ''}
-                        onChange={handleTournamentChange}
-                        className="flex-1 border-l border-gray-300 py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"
-                        style={{
-                            minWidth: '240px',
-                            '--tw-ring-color': mainColor
-                        }}
-                    >
-                        {tournaments.map((tournament) => (
-                            <option key={tournament.id} value={tournament.id}>
-                                {tournament.name} ({tournament.sport_type})
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </div>
+            <div className="flex justify-center mb-8">                 
+    <div className="flex items-center rounded-lg shadow-md border border-gray-200 bg-white overflow-hidden">                     
+        <div className="px-4 py-2 text-white font-medium" style={{ backgroundColor: mainColor }}>                         
+            Turnuva                     
+        </div>                     
+        <select                         
+            id="tournament-select"                         
+            value={selectedTournament || ''}                         
+            onChange={handleTournamentChange}                         
+            className="flex-1 border-l border-gray-300 py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:border-transparent bg-white"                         
+            style={{                             
+                minWidth: '240px',                             
+                '--tw-ring-color': mainColor                         
+            }}                     
+        >                         
+            {tournaments.map((tournament) => (                             
+                <option key={tournament.id} value={tournament.id}>                                 
+                    {tournament.name} ({tournament.sport_type})                             
+                </option>                         
+            ))}                     
+        </select>                 
+    </div>
+    
+    {/* Yarı Finaller Butonu */}
+    <a 
+        href="https://imamhatipsporoyunlari.com/turnuva-final-asamasi"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="ml-3 px-6 py-2 text-white font-medium rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
+        style={{ backgroundColor: mainColor }}
+    >
+        Yarı Finaller
+    </a>
+</div>
 
            
 
