@@ -28,13 +28,13 @@ const TournamentFinal = () => {
       matches: [
         {
           time: '12:00',
-          team1: 'KARTAL BORSA İHO',
+          team1: 'TENZİLE ERDOĞAN İHO',
           team2: 'RAKİP BEKLENİYOR...'
         },
         {
-          time: '13:00',
-          team1: 'TENZİLE ERDOĞAN İHO',
-          team2: 'RAKİP BEKLENİYOR...'
+            time: '13:00',
+            team1: 'KARTAL BORSA İHO',
+            team2: 'RAKİP BEKLENİYOR...'
         }
       ]
     }
