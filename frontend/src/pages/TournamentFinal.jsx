@@ -71,7 +71,7 @@ const TournamentFinal = () => {
         {
           time: '13:00',
           team1: 'MUSTAFA KAYMAKÇI İHO',
-          team2: 'Beylikdüzü Şehit Abdullah Tayyip Olçok İHO.'
+          team2: 'BEYLİKDÜZÜ ŞEHİT ABDULLAH TAYYİP OLÇOK İHO.'
         }
       ]
     }
