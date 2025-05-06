@@ -10,9 +10,9 @@ const sports = [
   { id: 'dart', title: 'Dart', icon: '🎯' },
   { id: 'wrestling', title: 'Bilek Güreşi', icon: '💪' },
   { id: 'gures', title: 'Güreş', icon: '🤼' },
+  { id: 'basketbol', title: 'Basketbol', icon: '🏀' },
 ];
 
-// Derece Sayfası - Herhangi bir Excel bağımlılığı olmadan, doğrudan verileri kullanarak
 const DerecePage = () => {
   const [allResults, setAllResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,8 @@ const DerecePage = () => {
         ...getGuresData(),
         ...getMasaTenisiData(),
         ...getOkculukData(),
-        ...getTaekwondoData()
+        ...getTaekwondoData(),
+        ...getBasketbolData()
       ];
       
       setAllResults(combinedData);
@@ -618,6 +619,12 @@ const getTaekwondoData = () => [
   { rank: "1", name: "", school: "SELAHADDİN EYYUBİ İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" },
   { rank: "2", name: "", school: "SULTANGAZİ YUNUS EMRE İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" },
   { rank: "3", name: "", school: "Şehit Öğretmen Mustafa Gümüş İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" }
+];
+
+const getBasketbolData = () => [
+  { rank: "1", name: "", school: "⁠Üsküdar İTO Marmara Aihl", category: "Genç Erkek", isTeam: true, sport: "basketbol" },
+  { rank: "2", name: "", school: "Başakşehir Akif İnan Aihl", category: "Genç Erkek", isTeam: true, sport: "basketbol" },
+  { rank: "3", name: "", school: "⁠⁠Pendik Kocayusuf Aihl", category: "Genç Erkek", isTeam: true, sport: "basketbol" },
 ];
 
   return (
