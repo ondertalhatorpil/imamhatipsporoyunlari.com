@@ -131,100 +131,102 @@ const DerecePage = () => {
   ];
 
   // Bilek Güreşi verileri
-  const getBilekGuresiData = () => [
-    // Yıldız Erkek Bilek Güreşi - 40 KG
-    { rank: "1", name: "MİRAÇ KÜPELİOĞLU", school: "ÇAMÇEŞME İHO", category: "YILDIZ ERKEK", weight: "40 Erkek", sport: "wrestling" },
-    { rank: "2", name: "AMNO FONNON", school: "ÇAMÇEŞME İHO", category: "YILDIZ ERKEK", weight: "40 Erkek", sport: "wrestling" },
-    { rank: "3", name: "HÜSEYİN BURAK ÇETİNKOL", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "40 Erkek", sport: "wrestling" },
-    { rank: "4", name: "AHMET SELİM USTAOSMANOĞLU", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "40 Erkek", sport: "wrestling" },
-    
-    // Yıldız Erkek Bilek Güreşi - 45 KG
-    { rank: "1", name: "MUHAMMED BEYTER", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "45 Erkek", sport: "wrestling" },
-    { rank: "2", name: "ENSAR BAŞARAN", school: "PENDİK ÖMER NASUHİ BİLMEN İHO", category: "YILDIZ ERKEK", weight: "45 Erkek", sport: "wrestling" },
-    { rank: "3", name: "BATUHAN ATALAY", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "45 Erkek", sport: "wrestling" },
-    { rank: "4", name: "SEMİH MUSTAFA AĞACA", school: "ÇAMÇEŞME İHO", category: "YILDIZ ERKEK", weight: "45 Erkek", sport: "wrestling" },
-    
-    // Yıldız Erkek Bilek Güreşi - 50 KG
-    { rank: "1", name: "MUHAMMED EFE ÇİÇEK", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "50 Erkek", sport: "wrestling" },
-    { rank: "2", name: "ALAADDİN FATİH ÇAMARASI", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "50 Erkek", sport: "wrestling" },
-    { rank: "3", name: "MUHAMMED HAMZA KILIÇ", school: "ÇAMÇEŞME İHO", category: "YILDIZ ERKEK", weight: "50 Erkek", sport: "wrestling" },
-    
-    // Yıldız Erkek Bilek Güreşi - 55 KG
-    { rank: "1", name: "MAHMUD SAİD AŞKBOĞA", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "55 Erkek", sport: "wrestling" },
-    { rank: "2", name: "MUHAMMED ALİ KAYA", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "55 Erkek", sport: "wrestling" },
-    { rank: "3", name: "FURKAN MELİH KINALI", school: "ŞEHİT MEHMET GÜDER AİHL", category: "YILDIZ ERKEK", weight: "55 Erkek", sport: "wrestling" },
-    { rank: "4", name: "MAHMUD ÖZER", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "55 Erkek", sport: "wrestling" },
-    
-    // Yıldız Erkek Bilek Güreşi - 60 KG
-    { rank: "1", name: "BURAK ALTINER", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "60 Erkek", sport: "wrestling" },
-    { rank: "2", name: "METEHAN TANDOĞAN", school: "GÜNGÖREN ÖMER DİNÇER İHO", category: "YILDIZ ERKEK", weight: "60 Erkek", sport: "wrestling" },
-    { rank: "3", name: "MELİK ARSLAN", school: "GÜNGÖREN ÖMER DİNÇER İHO", category: "YILDIZ ERKEK", weight: "60 Erkek", sport: "wrestling" },
-    
-    // Yıldız Erkek Bilek Güreşi - 65 KG
-    { rank: "1", name: "TAHA YASİN SOYDAŞ", school: "PROFİLO BARIŞ İHO", category: "YILDIZ ERKEK", weight: "65 Erkek", sport: "wrestling" },
-    { rank: "2", name: "RAİF ENSAR EKMEKÇİ", school: "PENDİK ÖMER NASUHİ BİLMEN İHO", category: "YILDIZ ERKEK", weight: "65 Erkek", sport: "wrestling" },
-    { rank: "3", name: "MAHMUT KONAK", school: "CEMAL ARTÜZ İHO", category: "YILDIZ ERKEK", weight: "65 Erkek", sport: "wrestling" },
-    { rank: "4", name: "HAMZA YUŞA YAŞAR", school: "ŞEHİT MEHMET GÜDER AİHL", category: "YILDIZ ERKEK", weight: "65 Erkek", sport: "wrestling" },
-    
-    // Yıldız Erkek Bilek Güreşi - 70+ KG
-    { rank: "1", name: "MİRAÇ ÖZKAN", school: "ŞEHİT MEHMET GÜDER AİHL", category: "YILDIZ ERKEK", weight: "70+ Erkek", sport: "wrestling" },
-    { rank: "2", name: "ÖMER SAİD GÜNDEŞ", school: "BEYOĞLU AİHL", category: "YILDIZ ERKEK", weight: "70+ Erkek", sport: "wrestling" },
-    { rank: "3", name: "RECEP AYDEMİR", school: "PENDİK ÖMER NASUHİ BİLMEN İHO", category: "YILDIZ ERKEK", weight: "70+ Erkek", sport: "wrestling" },
-    { rank: "4", name: "BARIŞ TÜRKDÖNMEZ", school: "BAKIRKÖY ŞEHİT MUHAMMET AMBAR İHO", category: "YILDIZ ERKEK", weight: "70+ Erkek", sport: "wrestling" },
-    
-    // Genç Erkek Bilek Güreşi - 50 KG
-    { rank: "1", name: "HAMZA AKBULUT", school: "ÜSKÜDAR AİHL", category: "GENÇ ERKEK", weight: "50 Erkek", sport: "wrestling" },
-    { rank: "2", name: "FURKAN BAŞIMOĞLU", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "50 Erkek", sport: "wrestling" },
-    { rank: "3", name: "SELMAN MUSTAFA GÜÇLÜ", school: "UFSM AİHL", category: "GENÇ ERKEK", weight: "50 Erkek", sport: "wrestling" },
-    { rank: "4", name: "ABDÜLKADİR MASOOB", school: "UFSM AİHL", category: "GENÇ ERKEK", weight: "50 Erkek", sport: "wrestling" },
-    
-    // Genç Erkek Bilek Güreşi - 55 KG
-    { rank: "1", name: "BEDİRHAN BOZKURT", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "55 Erkek", sport: "wrestling" },
-    { rank: "2", name: "DEVRAN KARASU", school: "KÜÇÜKKÖY AİHL", category: "GENÇ ERKEK", weight: "55 Erkek", sport: "wrestling" },
-    { rank: "3", name: "UMEIR ALAM", school: "UFSM AİHL", category: "GENÇ ERKEK", weight: "55 Erkek", sport: "wrestling" },
-    { rank: "4", name: "ABDULLAH TAMİNCİ", school: "ÖMER ÇAM AİHL", category: "GENÇ ERKEK", weight: "55 Erkek", sport: "wrestling" },
-    
-    // Genç Erkek Bilek Güreşi - 60 KG
-    { rank: "1", name: "EYÜP ENES KAYA", school: "BEYOĞLU AİHL", category: "GENÇ ERKEK", weight: "60 Erkek", sport: "wrestling" },
-    { rank: "2", name: "ABDÜLKERİM ARSLAN", school: "BEYOĞLU AİHL", category: "GENÇ ERKEK", weight: "60 Erkek", sport: "wrestling" },
-    { rank: "3", name: "YUSUF ZİYA TOPALOĞLU", school: "ÖMER ÇAM AİHL", category: "GENÇ ERKEK", weight: "60 Erkek", sport: "wrestling" },
-    { rank: "4", name: "ALİ İMRAN OĞUZ", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "60 Erkek", sport: "wrestling" },
-    
-    // Genç Erkek Bilek Güreşi - 65 KG
-    { rank: "1", name: "UĞUR OFLAZ", school: "ŞEHİT MEHMET GÜDER AİHL", category: "GENÇ ERKEK", weight: "65 Erkek", sport: "wrestling" },
-    { rank: "2", name: "MEVLÜT MUSTAFA AKDOĞAN", school: "ORHANGAZİ AİHL", category: "GENÇ ERKEK", weight: "65 Erkek", sport: "wrestling" },
-    { rank: "3", name: "ABDULLAH İMRAN SAVAŞ", school: "ŞEHİT MEHMET GÜDER AİHL", category: "GENÇ ERKEK", weight: "65 Erkek", sport: "wrestling" },
-    { rank: "4", name: "ÖZKAN TOPKAN", school: "İHSAN NAKİPOĞLU AİHL", category: "GENÇ ERKEK", weight: "65 Erkek", sport: "wrestling" },
-    
-    // Genç Erkek Bilek Güreşi - 70 KG
-    { rank: "1", name: "BİLAL ÇİFTÇİ", school: "ÜSKÜDAR AİHL", category: "GENÇ ERKEK", weight: "70 Erkek", sport: "wrestling" },
-    { rank: "2", name: "ZEKERİYYA SELİM AKSOY", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "70 Erkek", sport: "wrestling" },
-    { rank: "3", name: "MUHAMMED EROL SOYLU", school: "İTO MARMARA AİHL", category: "GENÇ ERKEK", weight: "70 Erkek", sport: "wrestling" },
-    { rank: "4", name: "EYÜP ENSAR GÖKSAL", school: "ŞEHİT MURAT KOCATÜRK AİHL", category: "GENÇ ERKEK", weight: "70 Erkek", sport: "wrestling" },
-    
-    // Genç Erkek Bilek Güreşi - 75 KG
-    { rank: "1", name: "SEZGİN AKÇA", school: "İHSAN NAKİPOĞLU AİHL", category: "GENÇ ERKEK", weight: "75 Erkek", sport: "wrestling" },
-    { rank: "2", name: "HARUN EFE ÇEÇEN", school: "İTO İBRAHİM ÇAĞLAR AİHL", category: "GENÇ ERKEK", weight: "75 Erkek", sport: "wrestling" },
-    { rank: "3", name: "HÜSEYİN MURAT ÖZKUL", school: "BEYOĞLU AİHL", category: "GENÇ ERKEK", weight: "75 Erkek", sport: "wrestling" },
-    { rank: "4", name: "UMUT ABDURRAHMAN", school: "UFSM AİHL", category: "GENÇ ERKEK", weight: "75 Erkek", sport: "wrestling" },
-    
-    // Genç Erkek Bilek Güreşi - 80+ KG
-    { rank: "1", name: "KEMAL EYMEN TOMKUŞ", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "80+ Erkek", sport: "wrestling" },
-    { rank: "2", name: "OĞUZHAN ULU", school: "İTO MARMARA AİHL", category: "GENÇ ERKEK", weight: "80+ Erkek", sport: "wrestling" },
-    { rank: "3", name: "YUSUF BERA AKÇA", school: "ÖMER ÇAM AİHL", category: "GENÇ ERKEK", weight: "80+ Erkek", sport: "wrestling" },
-    { rank: "4", name: "MUHAMMED YAHYA AKIN", school: "KADIKÖY AİHL", category: "GENÇ ERKEK", weight: "80+ Erkek", sport: "wrestling" },
-    
-    // Taekwondo takım tasnifleri (Bilek güreşi sayfasındaki)
-    { rank: "1", name: "", school: "İSTANBUL RTE AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "taekwondo" },
-    { rank: "2", name: "", school: "BEYOĞLU AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "taekwondo" },
-    { rank: "3", name: "", school: "ÜSKÜDAR AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "taekwondo" },
-    { rank: "4", name: "", school: "UFSM AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "taekwondo" },
-    { rank: "1", name: "", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" },
-    { rank: "2", name: "", school: "İSTANBUL RTE AİHL", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" },
-    { rank: "3", name: "", school: "ÇAMÇEŞME İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" },
-    { rank: "4", name: "", school: "ŞEHİT MEHMET GÜDER AİHL", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" }
-  ];
-
+const getBilekGuresiData = () => [
+  // Yıldız Erkek Bilek Güreşi - 40 KG
+  { rank: "1", name: "MİRAÇ KÜPELİOĞLU", school: "ÇAMÇEŞME İHO", category: "YILDIZ ERKEK", weight: "40 Erkek", sport: "wrestling" },
+  { rank: "2", name: "AMNO FONNON", school: "ÇAMÇEŞME İHO", category: "YILDIZ ERKEK", weight: "40 Erkek", sport: "wrestling" },
+  { rank: "3", name: "HÜSEYİN BURAK ÇETİNKOL", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "40 Erkek", sport: "wrestling" },
+  { rank: "4", name: "AHMET SELİM USTAOSMANOĞLU", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "40 Erkek", sport: "wrestling" },
+  
+  // Yıldız Erkek Bilek Güreşi - 45 KG
+  { rank: "1", name: "MUHAMMED BEYTER", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "45 Erkek", sport: "wrestling" },
+  { rank: "2", name: "ENSAR BAŞARAN", school: "PENDİK ÖMER NASUHİ BİLMEN İHO", category: "YILDIZ ERKEK", weight: "45 Erkek", sport: "wrestling" },
+  { rank: "3", name: "BATUHAN ATALAY", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "45 Erkek", sport: "wrestling" },
+  { rank: "4", name: "SEMİH MUSTAFA AĞACA", school: "ÇAMÇEŞME İHO", category: "YILDIZ ERKEK", weight: "45 Erkek", sport: "wrestling" },
+  
+  // Yıldız Erkek Bilek Güreşi - 50 KG
+  { rank: "1", name: "MUHAMMED EFE ÇİÇEK", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "50 Erkek", sport: "wrestling" },
+  { rank: "2", name: "ALAADDİN FATİH ÇAMARASI", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "50 Erkek", sport: "wrestling" },
+  { rank: "3", name: "MUHAMMED HAMZA KILIÇ", school: "ÇAMÇEŞME İHO", category: "YILDIZ ERKEK", weight: "50 Erkek", sport: "wrestling" },
+  
+  // Yıldız Erkek Bilek Güreşi - 55 KG
+  { rank: "1", name: "MAHMUD SAİD AŞKBOĞA", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "55 Erkek", sport: "wrestling" },
+  { rank: "2", name: "MUHAMMED ALİ KAYA", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "YILDIZ ERKEK", weight: "55 Erkek", sport: "wrestling" },
+  { rank: "3", name: "FURKAN MELİH KINALI", school: "ŞEHİT MEHMET GÜDER AİHL", category: "YILDIZ ERKEK", weight: "55 Erkek", sport: "wrestling" },
+  { rank: "4", name: "MAHMUD ÖZER", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "55 Erkek", sport: "wrestling" },
+  
+  // Yıldız Erkek Bilek Güreşi - 60 KG
+  { rank: "1", name: "BURAK ALTINER", school: "İSTANBUL RTE AİHL", category: "YILDIZ ERKEK", weight: "60 Erkek", sport: "wrestling" },
+  { rank: "2", name: "METEHAN TANDOĞAN", school: "GÜNGÖREN ÖMER DİNÇER İHO", category: "YILDIZ ERKEK", weight: "60 Erkek", sport: "wrestling" },
+  { rank: "3", name: "MELİK ARSLAN", school: "GÜNGÖREN ÖMER DİNÇER İHO", category: "YILDIZ ERKEK", weight: "60 Erkek", sport: "wrestling" },
+  
+  // Yıldız Erkek Bilek Güreşi - 65 KG
+  { rank: "1", name: "TAHA YASİN SOYDAŞ", school: "PROFİLO BARIŞ İHO", category: "YILDIZ ERKEK", weight: "65 Erkek", sport: "wrestling" },
+  { rank: "2", name: "RAİF ENSAR EKMEKÇİ", school: "PENDİK ÖMER NASUHİ BİLMEN İHO", category: "YILDIZ ERKEK", weight: "65 Erkek", sport: "wrestling" },
+  { rank: "3", name: "MAHMUT KONAK", school: "CEMAL ARTÜZ İHO", category: "YILDIZ ERKEK", weight: "65 Erkek", sport: "wrestling" },
+  { rank: "4", name: "HAMZA YUŞA YAŞAR", school: "ŞEHİT MEHMET GÜDER AİHL", category: "YILDIZ ERKEK", weight: "65 Erkek", sport: "wrestling" },
+  
+  // Yıldız Erkek Bilek Güreşi - 70+ KG
+  { rank: "1", name: "MİRAÇ ÖZKAN", school: "ŞEHİT MEHMET GÜDER AİHL", category: "YILDIZ ERKEK", weight: "70+ Erkek", sport: "wrestling" },
+  { rank: "2", name: "ÖMER SAİD GÜNDEŞ", school: "BEYOĞLU AİHL", category: "YILDIZ ERKEK", weight: "70+ Erkek", sport: "wrestling" },
+  { rank: "3", name: "RECEP AYDEMİR", school: "PENDİK ÖMER NASUHİ BİLMEN İHO", category: "YILDIZ ERKEK", weight: "70+ Erkek", sport: "wrestling" },
+  { rank: "4", name: "BARIŞ TÜRKDÖNMEZ", school: "BAKIRKÖY ŞEHİT MUHAMMET AMBAR İHO", category: "YILDIZ ERKEK", weight: "70+ Erkek", sport: "wrestling" },
+  
+  // Genç Erkek Bilek Güreşi - 50 KG
+  { rank: "1", name: "HAMZA AKBULUT", school: "ÜSKÜDAR AİHL", category: "GENÇ ERKEK", weight: "50 Erkek", sport: "wrestling" },
+  { rank: "2", name: "FURKAN BAŞIMOĞLU", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "50 Erkek", sport: "wrestling" },
+  { rank: "3", name: "SELMAN MUSTAFA GÜÇLÜ", school: "UFSM AİHL", category: "GENÇ ERKEK", weight: "50 Erkek", sport: "wrestling" },
+  { rank: "4", name: "ABDÜLKADİR MASOOB", school: "UFSM AİHL", category: "GENÇ ERKEK", weight: "50 Erkek", sport: "wrestling" },
+  
+  // Genç Erkek Bilek Güreşi - 55 KG
+  { rank: "1", name: "BEDİRHAN BOZKURT", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "55 Erkek", sport: "wrestling" },
+  { rank: "2", name: "DEVRAN KARASU", school: "KÜÇÜKKÖY AİHL", category: "GENÇ ERKEK", weight: "55 Erkek", sport: "wrestling" },
+  { rank: "3", name: "UMEIR ALAM", school: "UFSM AİHL", category: "GENÇ ERKEK", weight: "55 Erkek", sport: "wrestling" },
+  { rank: "4", name: "ABDULLAH TAMİNCİ", school: "ÖMER ÇAM AİHL", category: "GENÇ ERKEK", weight: "55 Erkek", sport: "wrestling" },
+  
+  // Genç Erkek Bilek Güreşi - 60 KG
+  { rank: "1", name: "EYÜP ENES KAYA", school: "BEYOĞLU AİHL", category: "GENÇ ERKEK", weight: "60 Erkek", sport: "wrestling" },
+  { rank: "2", name: "ABDÜLKERİM ARSLAN", school: "BEYOĞLU AİHL", category: "GENÇ ERKEK", weight: "60 Erkek", sport: "wrestling" },
+  { rank: "3", name: "YUSUF ZİYA TOPALOĞLU", school: "ÖMER ÇAM AİHL", category: "GENÇ ERKEK", weight: "60 Erkek", sport: "wrestling" },
+  { rank: "4", name: "ALİ İMRAN OĞUZ", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "60 Erkek", sport: "wrestling" },
+  
+  // Genç Erkek Bilek Güreşi - 65 KG
+  { rank: "1", name: "UĞUR OFLAZ", school: "ŞEHİT MEHMET GÜDER AİHL", category: "GENÇ ERKEK", weight: "65 Erkek", sport: "wrestling" },
+  { rank: "2", name: "MEVLÜT MUSTAFA AKDOĞAN", school: "ORHANGAZİ AİHL", category: "GENÇ ERKEK", weight: "65 Erkek", sport: "wrestling" },
+  { rank: "3", name: "ABDULLAH İMRAN SAVAŞ", school: "ŞEHİT MEHMET GÜDER AİHL", category: "GENÇ ERKEK", weight: "65 Erkek", sport: "wrestling" },
+  { rank: "4", name: "ÖZKAN TOPKAN", school: "İHSAN NAKİPOĞLU AİHL", category: "GENÇ ERKEK", weight: "65 Erkek", sport: "wrestling" },
+  
+  // Genç Erkek Bilek Güreşi - 70 KG
+  { rank: "1", name: "BİLAL ÇİFTÇİ", school: "ÜSKÜDAR AİHL", category: "GENÇ ERKEK", weight: "70 Erkek", sport: "wrestling" },
+  { rank: "2", name: "ZEKERİYYA SELİM AKSOY", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "70 Erkek", sport: "wrestling" },
+  { rank: "3", name: "MUHAMMED EROL SOYLU", school: "İTO MARMARA AİHL", category: "GENÇ ERKEK", weight: "70 Erkek", sport: "wrestling" },
+  { rank: "4", name: "EYÜP ENSAR GÖKSAL", school: "ŞEHİT MURAT KOCATÜRK AİHL", category: "GENÇ ERKEK", weight: "70 Erkek", sport: "wrestling" },
+  
+  // Genç Erkek Bilek Güreşi - 75 KG
+  { rank: "1", name: "SEZGİN AKÇA", school: "İHSAN NAKİPOĞLU AİHL", category: "GENÇ ERKEK", weight: "75 Erkek", sport: "wrestling" },
+  { rank: "2", name: "HARUN EFE ÇEÇEN", school: "İTO İBRAHİM ÇAĞLAR AİHL", category: "GENÇ ERKEK", weight: "75 Erkek", sport: "wrestling" },
+  { rank: "3", name: "HÜSEYİN MURAT ÖZKUL", school: "BEYOĞLU AİHL", category: "GENÇ ERKEK", weight: "75 Erkek", sport: "wrestling" },
+  { rank: "4", name: "UMUT ABDURRAHMAN", school: "UFSM AİHL", category: "GENÇ ERKEK", weight: "75 Erkek", sport: "wrestling" },
+  
+  // Genç Erkek Bilek Güreşi - 80+ KG
+  { rank: "1", name: "KEMAL EYMEN TOMKUŞ", school: "İSTANBUL RTE AİHL", category: "GENÇ ERKEK", weight: "80+ Erkek", sport: "wrestling" },
+  { rank: "2", name: "OĞUZHAN ULU", school: "İTO MARMARA AİHL", category: "GENÇ ERKEK", weight: "80+ Erkek", sport: "wrestling" },
+  { rank: "3", name: "YUSUF BERA AKÇA", school: "ÖMER ÇAM AİHL", category: "GENÇ ERKEK", weight: "80+ Erkek", sport: "wrestling" },
+  { rank: "4", name: "MUHAMMED YAHYA AKIN", school: "KADIKÖY AİHL", category: "GENÇ ERKEK", weight: "80+ Erkek", sport: "wrestling" },
+  
+  // Bilek Güreşi Takım Tasnifleri
+  // Genç Erkek Takım Tasnifi
+  { rank: "1", name: "", school: "İSTANBUL RTE AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "wrestling" },
+  { rank: "2", name: "", school: "BEYOĞLU AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "wrestling" },
+  { rank: "3", name: "", school: "ÜSKÜDAR AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "wrestling" },
+  { rank: "4", name: "", school: "UFSM AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "wrestling" },
+  
+  // Yıldız Erkek Takım Tasnifi
+  { rank: "1", name: "", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "wrestling" },
+  { rank: "2", name: "", school: "İSTANBUL RTE AİHL", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "wrestling" },
+  { rank: "3", name: "", school: "ÇAMÇEŞME İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "wrestling" },
+  { rank: "4", name: "", school: "ŞEHİT MEHMET GÜDER AİHL", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "wrestling" }
+];
   // Dart verileri
   const getDartData = () => [
     { rank: "1", name: "", school: "PENDİK ÇAMÇEŞME İHO", category: "YILDIZ KIZ", isTeam: true, sport: "dart" },
