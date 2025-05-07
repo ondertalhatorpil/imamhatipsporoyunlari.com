@@ -40,21 +40,25 @@ const TournamentFinal = () => {
     }
   ];
 
-  const futsalMatches = [
+  // Past semifinal matches with results
+  const pastFutsalMatches = [
     {
       date: '07.05.2025',
       category: 'GENÇ ERKEK',
       venue: 'Fatih UFSM Anadolu İmam Hatip Lisesi',
+      isCompleted: true,
       matches: [
         {
           time: '10:00',
-          team1: 'İTO MARMARA AİHL',
-          team2: 'FATİH UFSM AİHL'
+          team1: 'ÜSKÜDAR İTO MARMARA AİHL',
+          team2: 'FATİH UFSM AİHL',
+          score: '6 - 1'
         },
         {
           time: '11:00',
-          team1: 'YAVUZ BAHADIROĞLU AİHL',
-          team2: 'YAŞAR DEDEMAN AİHL'
+          team1: 'YAŞAR DEDEMAN AİHL',
+          team2: 'YAVUZ BAHADIROĞLU AİHL',
+          score: '9 - 1'
         }
       ]
     },
@@ -62,22 +66,67 @@ const TournamentFinal = () => {
       date: '07.05.2025',
       category: 'YILDIZ ERKEK',
       venue: 'Fatih UFSM Anadolu İmam Hatip Lisesi',
+      isCompleted: true,
       matches: [
         {
           time: '12:00',
-          team1: 'ANAFARTALAR İHO',
-          team2: 'ŞEHİT MUHAMMET AMBAR İHO'
+          team1: 'BAKIRKÖY ŞEHİT MUHAMMET AMBAR İHO',
+          team2: 'ANAFARTALAR İHO',
+          score: '5 - 1'
         },
         {
           time: '13:00',
-          team1: 'MUSTAFA KAYMAKÇI İHO',
-          team2: 'BEYLİKDÜZÜ ŞEHİT ABDULLAH TAYYİP OLÇOK İHO.'
+          team1: 'BEYLİKDÜZÜ ŞEHİT ABDULLAH TAYYİP OLÇOK İHO',
+          team2: 'ŞEHİT MUSTAFA KAYMAKÇI İHO',
+          score: '6 - 3'
         }
       ]
     }
   ];
 
-  const MatchCard = ({ match, sport }) => (
+  // Final and 3rd place matches
+  const finalFutsalMatches = [
+    {
+      date: '08.05.2025',
+      category: 'YILDIZ ERKEK',
+      venue: 'Bağcılar Çok Amaçlı Spor Salonu',
+      matches: [
+        {
+          time: '10:00',
+          title: '3.LÜK MAÇI',
+          team1: 'ANAFARTALAR İHO',
+          team2: 'ŞEHİT MUSTAFA KAYMAKÇI İHO'
+        },
+        {
+          time: '11:00',
+          title: 'FİNAL MAÇI',
+          team1: 'BAKIRKÖY ŞEHİT MUHAMMET AMBAR İHO',
+          team2: 'BEYLİKDÜZÜ ŞEHİT ABDULLAH TAYYİP OLÇOK İHO'
+        }
+      ]
+    },
+    {
+      date: '08.05.2025',
+      category: 'GENÇ ERKEK',
+      venue: 'Bağcılar Çok Amaçlı Spor Salonu',
+      matches: [
+        {
+          time: '12:00',
+          title: '3.LÜK MAÇI',
+          team1: 'FATİH UFSM AİHL',
+          team2: 'YAVUZ BAHADIROĞLU AİHL'
+        },
+        {
+          time: '13:00',
+          title: 'FİNAL MAÇI',
+          team1: 'ÜSKÜDAR İTO MARMARA AİHL',
+          team2: 'YAŞAR DEDEMAN AİHL'
+        }
+      ]
+    }
+  ];
+
+  const MatchCard = ({ match, sport, isCompleted = false }) => (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 px-3 sm:px-6 py-3 sm:py-4 mb-3">
       <div className="flex flex-col sm:flex-row items-center gap-3">
         {/* Time */}
@@ -86,6 +135,11 @@ const TournamentFinal = () => {
             <FaClock className="text-sm" />
             <span>{match.time}</span>
           </div>
+          {match.title && (
+            <div className="flex items-center gap-1.5 bg-[#333] text-white px-3 py-1 rounded-lg text-sm ml-2">
+              {match.title}
+            </div>
+          )}
           {sport === 'volleyball' ? (
             <FaVolleyballBall className="text-[#E84049] text-lg sm:hidden" />
           ) : (
@@ -105,9 +159,15 @@ const TournamentFinal = () => {
           </div>
           
           <div className="flex items-center justify-center">
-            <div className="bg-[#E84049] text-white px-3 py-1 rounded-md text-sm font-medium">
-              VS
-            </div>
+            {isCompleted && match.score ? (
+              <div className="bg-green-600 text-white px-3 py-1 rounded-md text-sm font-medium">
+                {match.score}
+              </div>
+            ) : (
+              <div className="bg-[#E84049] text-white px-3 py-1 rounded-md text-sm font-medium">
+                VS
+              </div>
+            )}
           </div>
           
           <div className={`w-full sm:flex-1 text-center sm:text-right text-sm sm:text-base font-medium break-words ${
@@ -120,7 +180,7 @@ const TournamentFinal = () => {
     </div>
   );
 
-  const SportSection = ({ title, icon, sport, matches }) => (
+  const SportSection = ({ title, icon, sport, completedMatches, upcomingMatches }) => (
     <div className="mb-10 sm:mb-16">
       <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-3 sm:p-4 mb-6 sm:mb-8">
         <div className="flex items-center gap-3">
@@ -131,33 +191,85 @@ const TournamentFinal = () => {
         </div>
       </div>
       
-      {matches.map((matchDay, idx) => (
-        <div key={idx} className="mb-6 sm:mb-8">
-          <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
-            <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
-              <FaCalendarAlt className="text-[#fff] text-sm" />
-              <span className="text-sm font-bold text-[#fff]">{matchDay.date}</span>
-            </div>
-            <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
-            <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
-              {matchDay.category}
-            </span>
+      {/* Past matches section */}
+      {completedMatches && completedMatches.length > 0 && (
+        <div className="mb-8 sm:mb-12">
+          <div className="relative inline-block mb-6">
+            <h3 className="text-xl font-bold text-gray-800 relative z-10">
+              YARI FİNAL SONUÇLARI
+            </h3>
+            <div className="absolute -bottom-1 left-0 w-full h-2 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
           
-          <div className="bg-white rounded-lg shadow-sm border border-[#E84049] border-opacity-20 px-3 py-2 mb-4 sm:mb-6">
-            <div className="flex items-center gap-1.5">
-              <FaMapMarkerAlt className="text-[#E84049] text-sm flex-shrink-0" />
-              <span className="text-sm text-[#E84049] font-bold">{matchDay.venue}</span>
+          {completedMatches.map((matchDay, idx) => (
+            <div key={idx} className="mb-6 sm:mb-8">
+              <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
+                <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
+                  <FaCalendarAlt className="text-[#E84049] text-sm" />
+                  <span className="text-sm font-bold text-[#E84049]">{matchDay.date}</span>
+                </div>
+                <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
+                <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
+                  {matchDay.category}
+                </span>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm border border-[#E84049] border-opacity-20 px-3 py-2 mb-4 sm:mb-6">
+                <div className="flex items-center gap-1.5">
+                  <FaMapMarkerAlt className="text-[#E84049] text-sm flex-shrink-0" />
+                  <span className="text-sm text-[#E84049] font-bold">{matchDay.venue}</span>
+                </div>
+              </div>
+              
+              <div>
+                {matchDay.matches.map((match, mIdx) => (
+                  <MatchCard key={mIdx} match={match} sport={sport} isCompleted={true} />
+                ))}
+              </div>
             </div>
-          </div>
-          
-          <div>
-            {matchDay.matches.map((match, mIdx) => (
-              <MatchCard key={mIdx} match={match} sport={sport} />
-            ))}
-          </div>
+          ))}
         </div>
-      ))}
+      )}
+      
+      {/* Upcoming matches section */}
+      {upcomingMatches && upcomingMatches.length > 0 && (
+        <div>
+          <div className="relative inline-block mb-6">
+            <h3 className="text-xl font-bold text-gray-800 relative z-10">
+              {title === "FUTSAL" ? "FİNAL MAÇLARI" : "YARI FİNALLER"}
+            </h3>
+            <div className="absolute -bottom-1 left-0 w-full h-2 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
+          </div>
+          
+          {upcomingMatches.map((matchDay, idx) => (
+            <div key={idx} className="mb-6 sm:mb-8">
+              <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
+                <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
+                  <FaCalendarAlt className="text-[#E84049] text-sm" />
+                  <span className="text-sm font-bold text-[#E84049]">{matchDay.date}</span>
+                </div>
+                <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
+                <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
+                  {matchDay.category}
+                </span>
+              </div>
+              
+              <div className="bg-white rounded-lg shadow-sm border border-[#E84049] border-opacity-20 px-3 py-2 mb-4 sm:mb-6">
+                <div className="flex items-center gap-1.5">
+                  <FaMapMarkerAlt className="text-[#E84049] text-sm flex-shrink-0" />
+                  <span className="text-sm text-[#E84049] font-bold">{matchDay.venue}</span>
+                </div>
+              </div>
+              
+              <div>
+                {matchDay.matches.map((match, mIdx) => (
+                  <MatchCard key={mIdx} match={match} sport={sport} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 
@@ -172,7 +284,7 @@ const TournamentFinal = () => {
           
           <div className="relative inline-block mt-6 sm:mt-8">
             <h1 className="text-2xl sm:text-4xl font-bold text-[#E84049] mb-3 sm:mb-6 relative z-10">
-              YARI FİNALLER
+              İMAM HATİP SPOR OYUNLARI
             </h1>
             <div className="absolute -bottom-1 left-0 w-full h-3 sm:h-4 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
@@ -183,7 +295,8 @@ const TournamentFinal = () => {
           title="FUTSAL"
           icon={<MdSportsSoccer className="text-white text-lg sm:text-xl" />}
           sport="futsal"
-          matches={futsalMatches}
+          completedMatches={pastFutsalMatches}
+          upcomingMatches={finalFutsalMatches}
         />
 
         {/* Voleybol Section */}
@@ -191,7 +304,7 @@ const TournamentFinal = () => {
           title="VOLEYBOL" 
           icon={<FaVolleyballBall className="text-white text-lg sm:text-xl" />}
           sport="volleyball"
-          matches={volleyballMatches}
+          upcomingMatches={volleyballMatches}
         />
 
       </div>
