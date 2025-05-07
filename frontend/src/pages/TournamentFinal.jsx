@@ -12,12 +12,12 @@ const TournamentFinal = () => {
         {
           time: '10:00',
           team1: 'KARTAL MEHMET AKİF ERSOY AİHL',
-          team2: 'RAKİP BEKLENİYOR...'
+          team2: 'SARIYER KIZ AİHL'
         },
         {
           time: '11:00',
           team1: 'SAMANDIRA KIZ AİHL',
-          team2: 'RAKİP BEKLENİYOR...'
+          team2: 'SİLİVRİ KIZ AİHL'
         }
       ]
     },
@@ -29,12 +29,12 @@ const TournamentFinal = () => {
         {
           time: '12:00',
           team1: 'TENZİLE ERDOĞAN İHO',
-          team2: 'RAKİP BEKLENİYOR...'
+          team2: 'BAŞAKŞEHİR ŞEHİT HAKİ ARAS İHO'
         },
         {
             time: '13:00',
             team1: 'KARTAL BORSA İHO',
-            team2: 'RAKİP BEKLENİYOR...'
+            team2: 'BAYRAMPAŞA MOBİL'
         }
       ]
     }
