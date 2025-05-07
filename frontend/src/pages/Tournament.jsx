@@ -132,7 +132,7 @@ const Tournament = () => {
         style={{ backgroundColor: mainColor }}
     >
         <FaTrophy className="text-lg" />
-        Yarı Finaller
+        Yarı Finaller ve Finaller
     </a>
 </div>
 

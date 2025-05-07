@@ -32,7 +32,7 @@ const TournamentFinal = () => {
           team2: 'BAŞAKŞEHİR ŞEHİT HAKİ ARAS İHO'
         },
         {
-            time: '13:00',
+            time: '13:30',
             team1: 'KARTAL BORSA İHO',
             team2: 'BAYRAMPAŞA MOBİL'
         }
