@@ -246,7 +246,7 @@ const TournamentFinal = () => {
               <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
                 <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
                   <FaCalendarAlt className="text-[#E84049] text-sm" />
-                  <span className="text-sm font-bold text-[#E84049]">{matchDay.date}</span>
+                  <span className="text-sm font-bold text-[#fff]">{matchDay.date}</span>
                 </div>
                 <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
                 <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
