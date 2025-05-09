@@ -144,7 +144,7 @@ const TournamentFinal = () => {
         {
           time: '10:00',
           title: '3.LÜK MAÇI',
-          team1: 'ANAFARTALAR İHO',
+          team1: 'SULTANBEYLİ ANAFARTALAR İHO',
           team2: 'ŞEHİT MUSTAFA KAYMAKÇI İHO',
           score: '3 - 0'
         },
@@ -174,7 +174,7 @@ const TournamentFinal = () => {
           time: '13:00',
           title: 'FİNAL MAÇI',
           team1: 'ÜSKÜDAR İTO MARMARA AİHL',
-          team2: 'YAŞAR DEDEMAN AİHL',
+          team2: 'SARIYER YAŞAR DEDEMAN AİHL',
           score: '8 - 2'
         }
       ]
