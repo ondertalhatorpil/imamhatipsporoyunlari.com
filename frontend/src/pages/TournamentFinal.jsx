@@ -168,7 +168,7 @@ const TournamentFinal = () => {
           title: '3.LÜK MAÇI',
           team1: 'FATİH UFSM AİHL',
           team2: 'YAVUZ BAHADIROĞLU AİHL',
-          score: 'BEKLENİYOR'
+          score: '7 - 2'
         },
         {
           time: '13:00',
@@ -348,9 +348,6 @@ const TournamentFinal = () => {
               ŞAMPİYONLAR 2025
             </h3>
           </div>
-          <div className="absolute top-0 right-0 left-0 mx-auto w-full flex justify-center mt-12">
-            <div className="w-24 h-1 bg-[#E84049]"></div>
-          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -464,11 +461,6 @@ const TournamentFinal = () => {
             <div className="absolute -bottom-1 left-0 w-full h-3 sm:h-4 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
           
-          <div className="w-full max-w-lg mx-auto mt-4">
-            <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden">
-              <div className="h-1 bg-[#E84049] w-full animate-pulse"></div>
-            </div>
-          </div>
         </div>
         
         {/* Champions Section */}
