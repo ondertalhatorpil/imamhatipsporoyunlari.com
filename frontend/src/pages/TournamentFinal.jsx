@@ -390,7 +390,7 @@ const TournamentFinal = () => {
                     <span className="font-bold">3</span>
                   </div>
                   <h5 className="font-medium text-gray-500 text-sm mb-1">ÜÇÜNCÜ</h5>
-                  <p className="font-bold text-center text-gray-800">ANAFARTALAR İHO</p>
+                  <p className="font-bold text-center text-gray-800">SULTANBEYLİ ANAFARTALAR İHO</p>
                 </div>
               </div>
             </div>
