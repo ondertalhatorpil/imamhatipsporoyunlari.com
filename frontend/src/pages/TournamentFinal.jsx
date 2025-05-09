@@ -3,21 +3,25 @@ import { FaTrophy, FaCalendarAlt, FaClock, FaVolleyballBall, FaFutbol, FaUsers, 
 import { MdSportsSoccer } from 'react-icons/md';
 
 const TournamentFinal = () => {
-  const volleyballMatches = [
+  // Past volleyball semifinal matches with results
+  const pastVolleyballMatches = [
     {
       date: '08.05.2025',
       category: 'GENÇ KIZ',
       venue: 'Cevizlibağ Atatürk Öğrenci Yurdu',
+      isCompleted: true,
       matches: [
         {
           time: '10:00',
           team1: 'KARTAL MEHMET AKİF ERSOY AİHL',
-          team2: 'SARIYER KIZ AİHL'
+          team2: 'SARIYER KIZ AİHL',
+          score: '2 - 0'
         },
         {
           time: '11:00',
           team1: 'SAMANDIRA KIZ AİHL',
-          team2: 'SİLİVRİ KIZ AİHL'
+          team2: 'SİLİVRİ KIZ AİHL',
+          score: '2 - 0'
         }
       ]
     },
@@ -25,16 +29,61 @@ const TournamentFinal = () => {
       date: '08.05.2025',
       category: 'YILDIZ KIZ',
       venue: 'Cevizlibağ Atatürk Öğrenci Yurdu',
+      isCompleted: true,
       matches: [
         {
           time: '12:00',
-          team1: 'TENZİLE ERDOĞAN İHO',
-          team2: 'BAŞAKŞEHİR ŞEHİT HAKİ ARAS İHO'
+          team1: 'BAŞAKŞEHİR ŞEHİT HAKİ ARAS İHO',
+          team2: 'TENZİLE ERDOĞAN İHO',
+          score: '2 - 0'
         },
         {
-            time: '13:30',
-            team1: 'KARTAL BORSA İHO',
-            team2: 'BAYRAMPAŞA MOBİL'
+          time: '13:00',
+          team1: 'BAYRAMPAŞA MOBİL İHO',
+          team2: 'KARTAL BORSA İHO',
+          score: '1 - 2'
+        }
+      ]
+    }
+  ];
+
+  // Upcoming volleyball finals
+  const upcomingVolleyballMatches = [
+    {
+      date: '12.05.2025',
+      category: 'YILDIZ KIZ',
+      venue: 'Cevizlibağ Atatürk Öğrenci Yurdu',
+      matches: [
+        {
+          time: '10:00',
+          title: '3.LÜK MAÇI',
+          team1: 'TENZİLE ERDOĞAN İHO',
+          team2: 'BAYRAMPAŞA İHO'
+        },
+        {
+          time: '11:00',
+          title: 'FİNAL MAÇI',
+          team1: 'KARTAL BORSA İHO',
+          team2: 'BAŞAKŞEHİR ŞEHİT HAKİ ARAS İHO'
+        }
+      ]
+    },
+    {
+      date: '12.05.2025',
+      category: 'GENÇ KIZ',
+      venue: 'Cevizlibağ Atatürk Öğrenci Yurdu',
+      matches: [
+        {
+          time: '12:00',
+          title: '3.LÜK MAÇI',
+          team1: 'SİLİVRİ KIZ AİHL',
+          team2: 'SARIYER KIZ AİHL'
+        },
+        {
+          time: '13:00',
+          title: 'FİNAL MAÇI',
+          team1: 'SAMANDIRA KIZ AİHL',
+          team2: 'KARTAL MEHMET AKİF ERSOY AİHL'
         }
       ]
     }
@@ -84,24 +133,27 @@ const TournamentFinal = () => {
     }
   ];
 
-  // Final and 3rd place matches
+  // Final and 3rd place matches with results
   const finalFutsalMatches = [
     {
       date: '08.05.2025',
       category: 'YILDIZ ERKEK',
       venue: 'Bağcılar Çok Amaçlı Spor Salonu',
+      isCompleted: true,
       matches: [
         {
           time: '10:00',
           title: '3.LÜK MAÇI',
           team1: 'ANAFARTALAR İHO',
-          team2: 'ŞEHİT MUSTAFA KAYMAKÇI İHO'
+          team2: 'ŞEHİT MUSTAFA KAYMAKÇI İHO',
+          score: '3 - 0'
         },
         {
           time: '11:00',
           title: 'FİNAL MAÇI',
           team1: 'BAKIRKÖY ŞEHİT MUHAMMET AMBAR İHO',
-          team2: 'BEYLİKDÜZÜ ŞEHİT ABDULLAH TAYYİP OLÇOK İHO'
+          team2: 'BEYLİKDÜZÜ ŞEHİT ABDULLAH TAYYİP OLÇOK İHO',
+          score: '3 - 4'
         }
       ]
     },
@@ -109,18 +161,21 @@ const TournamentFinal = () => {
       date: '08.05.2025',
       category: 'GENÇ ERKEK',
       venue: 'Bağcılar Çok Amaçlı Spor Salonu',
+      isCompleted: true,
       matches: [
         {
           time: '12:00',
           title: '3.LÜK MAÇI',
           team1: 'FATİH UFSM AİHL',
-          team2: 'YAVUZ BAHADIROĞLU AİHL'
+          team2: 'YAVUZ BAHADIROĞLU AİHL',
+          score: '7 - 2'
         },
         {
           time: '13:00',
           title: 'FİNAL MAÇI',
           team1: 'ÜSKÜDAR İTO MARMARA AİHL',
-          team2: 'YAŞAR DEDEMAN AİHL'
+          team2: 'YAŞAR DEDEMAN AİHL',
+          score: '8 - 2'
         }
       ]
     }
@@ -196,7 +251,7 @@ const TournamentFinal = () => {
         <div className="mb-8 sm:mb-12">
           <div className="relative inline-block mb-6">
             <h3 className="text-xl font-bold text-gray-800 relative z-10">
-              YARI FİNAL SONUÇLARI
+              {sport === 'futsal' && completedMatches === finalFutsalMatches ? 'FİNAL SONUÇLARI' : 'YARI FİNAL SONUÇLARI'}
             </h3>
             <div className="absolute -bottom-1 left-0 w-full h-2 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
@@ -205,8 +260,8 @@ const TournamentFinal = () => {
             <div key={idx} className="mb-6 sm:mb-8">
               <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
                 <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
-                  <FaCalendarAlt className="text-[#fff] text-sm" />
-                  <span className="text-sm font-bold text-[#fff]">{matchDay.date}</span>
+                  <FaCalendarAlt className="text-gray-700 text-sm" />
+                  <span className="text-sm font-bold text-gray-700">{matchDay.date}</span>
                 </div>
                 <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
                 <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
@@ -223,7 +278,7 @@ const TournamentFinal = () => {
               
               <div>
                 {matchDay.matches.map((match, mIdx) => (
-                  <MatchCard key={mIdx} match={match} sport={sport} isCompleted={true} />
+                  <MatchCard key={mIdx} match={match} sport={sport} isCompleted={matchDay.isCompleted} />
                 ))}
               </div>
             </div>
@@ -236,7 +291,7 @@ const TournamentFinal = () => {
         <div>
           <div className="relative inline-block mb-6">
             <h3 className="text-xl font-bold text-gray-800 relative z-10">
-              {title === "FUTSAL" ? "FİNAL MAÇLARI" : "YARI FİNALLER"}
+              {sport === 'volleyball' ? "FİNAL MAÇLARI" : "GELECEK MAÇLAR"}
             </h3>
             <div className="absolute -bottom-1 left-0 w-full h-2 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
@@ -245,8 +300,8 @@ const TournamentFinal = () => {
             <div key={idx} className="mb-6 sm:mb-8">
               <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
                 <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
-                  <FaCalendarAlt className="text-[#fff] text-sm" />
-                  <span className="text-sm font-bold text-[#fff]">{matchDay.date}</span>
+                  <FaCalendarAlt className="text-gray-700 text-sm" />
+                  <span className="text-sm font-bold text-gray-700">{matchDay.date}</span>
                 </div>
                 <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
                 <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
@@ -273,6 +328,84 @@ const TournamentFinal = () => {
     </div>
   );
 
+  // Display winners for completed tournaments
+  const WinnersSection = () => {
+    // Get champion and runner-up for futsal
+    const yildizErkekFinal = finalFutsalMatches[0].matches[1];
+    const gencErkekFinal = finalFutsalMatches[1].matches[1];
+
+    const yildizErkekWinner = yildizErkekFinal.score === '3 - 4' ? yildizErkekFinal.team2 : yildizErkekFinal.team1;
+    const yildizErkekRunnerUp = yildizErkekFinal.score === '3 - 4' ? yildizErkekFinal.team1 : yildizErkekFinal.team2;
+    
+    const gencErkekWinner = gencErkekFinal.score === '8 - 2' ? gencErkekFinal.team1 : gencErkekFinal.team2;
+    const gencErkekRunnerUp = gencErkekFinal.score === '8 - 2' ? gencErkekFinal.team2 : gencErkekFinal.team1;
+
+    return (
+      <div className="mb-10 sm:mb-16">
+        <div className="relative inline-block mb-6">
+          <h3 className="text-xl font-bold text-gray-800 relative z-10">
+            FUTSAL ŞAMPİYONLARI
+          </h3>
+          <div className="absolute -bottom-1 left-0 w-full h-2 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Yıldız Erkek */}
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
+            <div className="bg-[#E84049] text-white py-2 px-4 font-bold text-center">
+              YILDIZ ERKEK
+            </div>
+            <div className="p-4">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <FaTrophy className="text-yellow-500 text-xl" />
+                <h4 className="font-bold">ŞAMPİYON</h4>
+              </div>
+              <div className="text-center font-bold text-lg text-[#E84049] mb-4">
+                {yildizErkekWinner}
+              </div>
+              
+              <div className="text-center font-medium mb-1">İKİNCİ</div>
+              <div className="text-center text-gray-700">
+                {yildizErkekRunnerUp}
+              </div>
+              
+              <div className="text-center font-medium mt-3 mb-1">ÜÇÜNCÜ</div>
+              <div className="text-center text-gray-700">
+                ANAFARTALAR İHO
+              </div>
+            </div>
+          </div>
+          
+          {/* Genç Erkek */}
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
+            <div className="bg-[#E84049] text-white py-2 px-4 font-bold text-center">
+              GENÇ ERKEK
+            </div>
+            <div className="p-4">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <FaTrophy className="text-yellow-500 text-xl" />
+                <h4 className="font-bold">ŞAMPİYON</h4>
+              </div>
+              <div className="text-center font-bold text-lg text-[#E84049] mb-4">
+                {gencErkekWinner}
+              </div>
+              
+              <div className="text-center font-medium mb-1">İKİNCİ</div>
+              <div className="text-center text-gray-700">
+                {gencErkekRunnerUp}
+              </div>
+              
+              <div className="text-center font-medium mt-3 mb-1">ÜÇÜNCÜ</div>
+              <div className="text-center text-gray-700">
+                {finalFutsalMatches[1].matches[0].score === 'BEKLENİYOR' ? 'BEKLENİYOR' : 'FATİH UFSM AİHL'}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen py-6 sm:py-12 px-3 sm:px-6 lg:px-8 mt-12 sm:mt-20">
       <div className="max-w-6xl mx-auto">
@@ -289,22 +422,32 @@ const TournamentFinal = () => {
             <div className="absolute -bottom-1 left-0 w-full h-3 sm:h-4 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
         </div>
+        
+        {/* Champions Section */}
+        <WinnersSection />
 
         {/* Futsal Section */}
         <SportSection 
           title="FUTSAL"
           icon={<MdSportsSoccer className="text-white text-lg sm:text-xl" />}
           sport="futsal"
-          completedMatches={pastFutsalMatches}
-          upcomingMatches={finalFutsalMatches}
+          completedMatches={finalFutsalMatches}
         />
 
-        {/* Voleybol Section */}
+        {/* Voleybol Past Matches Section */}
         <SportSection 
-          title="VOLEYBOL" 
+          title="VOLEYBOL - GEÇEN MAÇLAR" 
           icon={<FaVolleyballBall className="text-white text-lg sm:text-xl" />}
           sport="volleyball"
-          upcomingMatches={volleyballMatches}
+          completedMatches={pastVolleyballMatches}
+        />
+        
+        {/* Voleybol Future Matches Section */}
+        <SportSection 
+          title="VOLEYBOL - FİNAL MAÇLARI" 
+          icon={<FaVolleyballBall className="text-white text-lg sm:text-xl" />}
+          sport="volleyball"
+          upcomingMatches={upcomingVolleyballMatches}
         />
 
       </div>
