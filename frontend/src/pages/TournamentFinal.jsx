@@ -47,24 +47,27 @@ const TournamentFinal = () => {
     }
   ];
 
-  // Upcoming volleyball finals
-  const upcomingVolleyballMatches = [
+  // Volleyball final matches with results
+  const finalVolleyballMatches = [
     {
       date: '12.05.2025',
       category: 'YILDIZ KIZ',
       venue: 'Cevizlibağ Atatürk Öğrenci Yurdu',
+      isCompleted: true,
       matches: [
         {
           time: '10:00',
           title: '3.LÜK MAÇI',
           team1: 'TENZİLE ERDOĞAN İHO',
-          team2: 'BAYRAMPAŞA İHO'
+          team2: 'BAYRAMPAŞA MOBİL İHO',
+          score: '0 - 2'
         },
         {
           time: '11:00',
           title: 'FİNAL MAÇI',
-          team1: 'KARTAL BORSA İHO',
-          team2: 'BAŞAKŞEHİR ŞEHİT HAKİ ARAS İHO'
+          team1: 'BAŞAKŞEHİR ŞEHİT HAKİ ARAS İHO',
+          team2: 'KARTAL BORSA İSTANBUL İHO',
+          score: '2 - 0'
         }
       ]
     },
@@ -72,18 +75,21 @@ const TournamentFinal = () => {
       date: '12.05.2025',
       category: 'GENÇ KIZ',
       venue: 'Cevizlibağ Atatürk Öğrenci Yurdu',
+      isCompleted: true,
       matches: [
         {
           time: '12:00',
           title: '3.LÜK MAÇI',
-          team1: 'SİLİVRİ KIZ AİHL',
-          team2: 'SARIYER KIZ AİHL'
+          team1: 'SARIYER KIZ AİHL',
+          team2: 'SİLİVRİ KIZ AİHL',
+          score: '0 - 2'
         },
         {
           time: '13:00',
           title: 'FİNAL MAÇI',
-          team1: 'SAMANDIRA KIZ AİHL',
-          team2: 'KARTAL MEHMET AKİF ERSOY AİHL'
+          team1: 'SANCAKTEPE SAMANDIRA KIZ AİHL',
+          team2: 'KARTAL MEHMET AKİF ERSOY AİHL',
+          score: '2 - 0'
         }
       ]
     }
@@ -186,20 +192,20 @@ const TournamentFinal = () => {
       <div className="flex flex-col sm:flex-row items-center gap-3">
         {/* Time */}
         <div className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2 mb-2 sm:mb-0">
-          <div className="flex items-center gap-1.5 bg-[#E84049] text-white px-3 py-1.5 rounded-lg text-sm shadow-sm">
+          <div className="flex items-center gap-1.5 bg-red-500 text-white px-3 py-1.5 rounded-lg text-sm shadow-sm">
             <FaClock className="text-sm" />
             <span className="font-medium">{match.time}</span>
           </div>
           {match.title && (
-            <div className="flex items-center gap-1.5 bg-[#333] text-white px-3 py-1.5 rounded-lg text-sm ml-2 shadow-sm">
+            <div className="flex items-center gap-1.5 bg-gray-800 text-white px-3 py-1.5 rounded-lg text-sm ml-2 shadow-sm">
               {match.title}
             </div>
           )}
           <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 shadow-inner">
             {sport === 'volleyball' ? (
-              <FaVolleyballBall className="text-[#E84049] text-lg" />
+              <FaVolleyballBall className="text-red-500 text-lg" />
             ) : (
-              <FaFutbol className="text-[#E84049] text-lg" />
+              <FaFutbol className="text-red-500 text-lg" />
             )}
           </div>
         </div>
@@ -217,7 +223,7 @@ const TournamentFinal = () => {
                 <span className="relative z-10">{match.score}</span>
               </div>
             ) : (
-              <div className="bg-[#E84049] text-white px-4 py-1.5 rounded-md text-base font-bold shadow-md relative overflow-hidden">
+              <div className="bg-red-500 text-white px-4 py-1.5 rounded-md text-base font-bold shadow-md relative overflow-hidden">
                 <div className="absolute inset-0 bg-white opacity-10"></div>
                 <span className="relative z-10">VS</span>
               </div>
@@ -225,7 +231,7 @@ const TournamentFinal = () => {
           </div>
           
           <div className={`w-full sm:flex-1 text-center sm:text-right text-sm sm:text-base font-semibold break-words px-2 py-1 rounded-md bg-gray-50 border border-gray-100 ${
-            match.team2 === 'RAKİP BEKLENİYOR...' ? 'text-[#E84049] italic' : 'text-gray-800'
+            match.team2 === 'RAKİP BEKLENİYOR...' ? 'text-red-500 italic' : 'text-gray-800'
           }`}>
             {match.team2}
           </div>
@@ -234,15 +240,15 @@ const TournamentFinal = () => {
     </div>
   );
 
-  const SportSection = ({ title, icon, sport, completedMatches, upcomingMatches }) => (
+  const SportSection = ({ title, icon, sport, completedMatches }) => (
     <div className="mb-10 sm:mb-16">
       <div className="bg-white rounded-lg shadow-md border border-gray-100 p-3 sm:p-4 mb-6 sm:mb-8 transform transition-all duration-300 hover:shadow-lg">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#E84049] flex items-center justify-center shadow-md relative">
-            <div className="absolute inset-0 rounded-full bg-[#E84049] animate-ping opacity-30"></div>
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-red-500 flex items-center justify-center shadow-md relative">
+            <div className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-30"></div>
             {React.cloneElement(icon, { className: 'text-white text-lg sm:text-xl relative z-10' })}
           </div>
-          <h2 className="text-lg sm:text-2xl font-bold text-[#E84049] tracking-wider">{title}</h2>
+          <h2 className="text-lg sm:text-2xl font-bold text-red-500 tracking-wider">{title}</h2>
         </div>
       </div>
       
@@ -251,74 +257,38 @@ const TournamentFinal = () => {
         <div className="mb-8 sm:mb-12">
           <div className="relative inline-block mb-6">
             <h3 className="text-xl font-bold text-gray-800 relative z-10">
-              {sport === 'futsal' && completedMatches === finalFutsalMatches ? 'FİNAL SONUÇLARI' : 'YARI FİNAL SONUÇLARI'}
+              {sport === 'futsal' ? 
+                (completedMatches === finalFutsalMatches ? 'FİNAL SONUÇLARI' : 'YARI FİNAL SONUÇLARI')
+                :
+                (completedMatches === finalVolleyballMatches ? 'FİNAL SONUÇLARI' : 'YARI FİNAL SONUÇLARI')
+              }
             </h3>
-            <div className="absolute -bottom-1 left-0 w-full h-2 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
+            <div className="absolute -bottom-1 left-0 w-full h-2 bg-red-500 opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
           
           {completedMatches.map((matchDay, idx) => (
             <div key={idx} className="mb-6 sm:mb-8">
               <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
-                <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
+                <div className="bg-red-50 rounded-md px-3 py-1.5 flex items-center gap-1.5">
                   <FaCalendarAlt className="text-gray-700 text-sm" />
                   <span className="text-sm font-bold text-gray-700">{matchDay.date}</span>
                 </div>
-                <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
-                <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
+                <div className="h-1 w-8 bg-red-500 bg-opacity-30 hidden sm:block"></div>
+                <span className="bg-red-500 text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
                   {matchDay.category}
                 </span>
               </div>
               
-              <div className="bg-white rounded-lg shadow-sm border border-[#E84049] border-opacity-20 px-3 py-2 mb-4 sm:mb-6">
+              <div className="bg-white rounded-lg shadow-sm border border-red-500 border-opacity-20 px-3 py-2 mb-4 sm:mb-6">
                 <div className="flex items-center gap-1.5">
-                  <FaMapMarkerAlt className="text-[#E84049] text-sm flex-shrink-0" />
-                  <span className="text-sm text-[#E84049] font-bold">{matchDay.venue}</span>
+                  <FaMapMarkerAlt className="text-red-500 text-sm flex-shrink-0" />
+                  <span className="text-sm text-red-500 font-bold">{matchDay.venue}</span>
                 </div>
               </div>
               
               <div>
                 {matchDay.matches.map((match, mIdx) => (
                   <MatchCard key={mIdx} match={match} sport={sport} isCompleted={matchDay.isCompleted} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      
-      {/* Upcoming matches section */}
-      {upcomingMatches && upcomingMatches.length > 0 && (
-        <div>
-          <div className="relative inline-block mb-6">
-            <h3 className="text-xl font-bold text-gray-800 relative z-10">
-              {sport === 'volleyball' ? "FİNAL MAÇLARI" : "GELECEK MAÇLAR"}
-            </h3>
-            <div className="absolute -bottom-1 left-0 w-full h-2 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
-          </div>
-          
-          {upcomingMatches.map((matchDay, idx) => (
-            <div key={idx} className="mb-6 sm:mb-8">
-              <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
-                <div className="bg-[#E84049] bg-opacity-5 rounded-md px-3 py-1.5 flex items-center gap-1.5">
-                  <FaCalendarAlt className="text-gray-700 text-sm" />
-                  <span className="text-sm font-bold text-gray-700">{matchDay.date}</span>
-                </div>
-                <div className="h-1 w-8 bg-[#E84049] bg-opacity-30 hidden sm:block"></div>
-                <span className="bg-[#E84049] text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-bold shadow-md">
-                  {matchDay.category}
-                </span>
-              </div>
-              
-              <div className="bg-white rounded-lg shadow-sm border border-[#E84049] border-opacity-20 px-3 py-2 mb-4 sm:mb-6">
-                <div className="flex items-center gap-1.5">
-                  <FaMapMarkerAlt className="text-[#E84049] text-sm flex-shrink-0" />
-                  <span className="text-sm text-[#E84049] font-bold">{matchDay.venue}</span>
-                </div>
-              </div>
-              
-              <div>
-                {matchDay.matches.map((match, mIdx) => (
-                  <MatchCard key={mIdx} match={match} sport={sport} />
                 ))}
               </div>
             </div>
@@ -340,10 +310,20 @@ const TournamentFinal = () => {
     const gencErkekWinner = gencErkekFinal.score === '8 - 2' ? gencErkekFinal.team1 : gencErkekFinal.team2;
     const gencErkekRunnerUp = gencErkekFinal.score === '8 - 2' ? gencErkekFinal.team2 : gencErkekFinal.team1;
 
+    // Get champion and runner-up for volleyball
+    const yildizKizFinal = finalVolleyballMatches[0].matches[1];
+    const gencKizFinal = finalVolleyballMatches[1].matches[1];
+
+    const yildizKizWinner = yildizKizFinal.score === '2 - 0' ? yildizKizFinal.team1 : yildizKizFinal.team2;
+    const yildizKizRunnerUp = yildizKizFinal.score === '2 - 0' ? yildizKizFinal.team2 : yildizKizFinal.team1;
+    
+    const gencKizWinner = gencKizFinal.score === '2 - 0' ? gencKizFinal.team1 : gencKizFinal.team2;
+    const gencKizRunnerUp = gencKizFinal.score === '2 - 0' ? gencKizFinal.team2 : gencKizFinal.team1;
+
     return (
       <div className="mb-12 sm:mb-20">
         <div className="relative text-center mb-8">
-          <div className="inline-block bg-[#E84049] text-white py-2 px-6 rounded-lg shadow-lg transform -rotate-1">
+          <div className="inline-block bg-red-500 text-white py-2 px-6 rounded-lg shadow-lg transform -rotate-1">
             <h3 className="text-xl sm:text-2xl font-bold tracking-wide">
               ŞAMPİYONLAR 2025
             </h3>
@@ -351,12 +331,12 @@ const TournamentFinal = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Yıldız Erkek */}
+          {/* Yıldız Erkek Futsal */}
           <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-            <div className="bg-[#E84049] text-white py-3 px-4 font-bold text-center relative overflow-hidden">
+            <div className="bg-red-500 text-white py-3 px-4 font-bold text-center relative overflow-hidden">
               <div className="absolute -right-6 -top-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
               <div className="absolute -left-6 -bottom-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
-              <h3 className="text-lg relative z-10">YILDIZ ERKEK</h3>
+              <h3 className="text-lg relative z-10">YILDIZ ERKEK FUTSAL</h3>
             </div>
             
             <div className="p-6">
@@ -386,7 +366,7 @@ const TournamentFinal = () => {
                 </div>
                 
                 <div className="bg-gray-50 rounded-lg p-3 shadow-sm border border-gray-100 flex flex-col items-center">
-                  <div className="w-8 h-8 flex items-center justify-center bg-[#cd7f32] text-white rounded-full mb-2">
+                  <div className="w-8 h-8 flex items-center justify-center bg-orange-600 text-white rounded-full mb-2">
                     <span className="font-bold">3</span>
                   </div>
                   <h5 className="font-medium text-gray-500 text-sm mb-1">ÜÇÜNCÜ</h5>
@@ -396,12 +376,12 @@ const TournamentFinal = () => {
             </div>
           </div>
           
-          {/* Genç Erkek */}
+          {/* Genç Erkek Futsal */}
           <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-            <div className="bg-[#E84049] text-white py-3 px-4 font-bold text-center relative overflow-hidden">
+            <div className="bg-red-500 text-white py-3 px-4 font-bold text-center relative overflow-hidden">
               <div className="absolute -right-6 -top-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
               <div className="absolute -left-6 -bottom-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
-              <h3 className="text-lg relative z-10">GENÇ ERKEK</h3>
+              <h3 className="text-lg relative z-10">GENÇ ERKEK FUTSAL</h3>
             </div>
             
             <div className="p-6">
@@ -431,11 +411,101 @@ const TournamentFinal = () => {
                 </div>
                 
                 <div className="bg-gray-50 rounded-lg p-3 shadow-sm border border-gray-100 flex flex-col items-center">
-                  <div className="w-8 h-8 flex items-center justify-center bg-[#cd7f32] text-white rounded-full mb-2">
+                  <div className="w-8 h-8 flex items-center justify-center bg-orange-600 text-white rounded-full mb-2">
                     <span className="font-bold">3</span>
                   </div>
                   <h5 className="font-medium text-gray-500 text-sm mb-1">ÜÇÜNCÜ</h5>
                   <p className="font-bold text-center text-gray-800">FATİH UFSM AİHL</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Yıldız Kız Voleybol */}
+          <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            <div className="bg-red-500 text-white py-3 px-4 font-bold text-center relative overflow-hidden">
+              <div className="absolute -right-6 -top-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+              <div className="absolute -left-6 -bottom-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+              <h3 className="text-lg relative z-10">YILDIZ KIZ VOLEYBOL</h3>
+            </div>
+            
+            <div className="p-6">
+              {/* Champion */}
+              <div className="bg-yellow-50 rounded-lg p-4 mb-6 relative overflow-hidden shadow-sm border border-yellow-100">
+                <div className="absolute top-0 right-0 w-16 h-16">
+                  <div className="absolute transform rotate-45 bg-yellow-400 text-xs text-white font-bold py-1 right-[-35px] top-[32px] w-[140px] text-center">
+                    ŞAMPİYON
+                  </div>
+                </div>
+                <div className="flex items-center mb-3">
+                  <FaTrophy className="text-yellow-500 text-2xl mr-3" />
+                  <div className="flex-1 text-center sm:text-left">
+                    <h4 className="font-extrabold text-xl sm:text-2xl text-gray-800">{yildizKizWinner}</h4>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Runner-up and Third Place */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-gray-50 rounded-lg p-3 shadow-sm border border-gray-100 flex flex-col items-center">
+                  <div className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full mb-2">
+                    <span className="font-bold text-gray-700">2</span>
+                  </div>
+                  <h5 className="font-medium text-gray-500 text-sm mb-1">İKİNCİ</h5>
+                  <p className="font-bold text-center text-gray-800">{yildizKizRunnerUp}</p>
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg p-3 shadow-sm border border-gray-100 flex flex-col items-center">
+                  <div className="w-8 h-8 flex items-center justify-center bg-orange-600 text-white rounded-full mb-2">
+                    <span className="font-bold">3</span>
+                  </div>
+                  <h5 className="font-medium text-gray-500 text-sm mb-1">ÜÇÜNCÜ</h5>
+                  <p className="font-bold text-center text-gray-800">BAYRAMPAŞA MOBİL İHO</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Genç Kız Voleybol */}
+          <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            <div className="bg-red-500 text-white py-3 px-4 font-bold text-center relative overflow-hidden">
+              <div className="absolute -right-6 -top-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+              <div className="absolute -left-6 -bottom-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+              <h3 className="text-lg relative z-10">GENÇ KIZ VOLEYBOL</h3>
+            </div>
+            
+            <div className="p-6">
+              {/* Champion */}
+              <div className="bg-yellow-50 rounded-lg p-4 mb-6 relative overflow-hidden shadow-sm border border-yellow-100">
+                <div className="absolute top-0 right-0 w-16 h-16">
+                  <div className="absolute transform rotate-45 bg-yellow-400 text-xs text-white font-bold py-1 right-[-35px] top-[32px] w-[140px] text-center">
+                    ŞAMPİYON
+                  </div>
+                </div>
+                <div className="flex items-center mb-3">
+                  <FaTrophy className="text-yellow-500 text-2xl mr-3" />
+                  <div className="flex-1 text-center sm:text-left">
+                    <h4 className="font-extrabold text-xl sm:text-2xl text-gray-800">{gencKizWinner}</h4>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Runner-up and Third Place */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div className="bg-gray-50 rounded-lg p-3 shadow-sm border border-gray-100 flex flex-col items-center">
+                  <div className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full mb-2">
+                    <span className="font-bold text-gray-700">2</span>
+                  </div>
+                  <h5 className="font-medium text-gray-500 text-sm mb-1">İKİNCİ</h5>
+                  <p className="font-bold text-center text-gray-800">{gencKizRunnerUp}</p>
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg p-3 shadow-sm border border-gray-100 flex flex-col items-center">
+                  <div className="w-8 h-8 flex items-center justify-center bg-orange-600 text-white rounded-full mb-2">
+                    <span className="font-bold">3</span>
+                  </div>
+                  <h5 className="font-medium text-gray-500 text-sm mb-1">ÜÇÜNCÜ</h5>
+                  <p className="font-bold text-center text-gray-800">SİLİVRİ KIZ AİHL</p>
                 </div>
               </div>
             </div>
@@ -455,12 +525,11 @@ const TournamentFinal = () => {
           </div>
           
           <div className="relative inline-block mt-6 sm:mt-8">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#E84049] mb-3 sm:mb-6 relative z-10 tracking-wide">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-red-500 mb-3 sm:mb-6 relative z-10 tracking-wide">
               İMAM HATİP SPOR OYUNLARI
             </h1>
-            <div className="absolute -bottom-1 left-0 w-full h-3 sm:h-4 bg-[#E84049] opacity-10 rounded-md transform -skew-x-6 z-0"></div>
+            <div className="absolute -bottom-1 left-0 w-full h-3 sm:h-4 bg-red-500 opacity-10 rounded-md transform -skew-x-6 z-0"></div>
           </div>
-          
         </div>
         
         {/* Champions Section */}
@@ -468,7 +537,14 @@ const TournamentFinal = () => {
 
         {/* Futsal Section */}
         <SportSection 
-          title="FUTSAL"
+          title="FUTSAL - YARI FİNAL SONUÇLARI"
+          icon={<MdSportsSoccer className="text-white text-lg sm:text-xl" />}
+          sport="futsal"
+          completedMatches={pastFutsalMatches}
+        />
+
+        <SportSection 
+          title="FUTSAL - FİNAL SONUÇLARI"
           icon={<MdSportsSoccer className="text-white text-lg sm:text-xl" />}
           sport="futsal"
           completedMatches={finalFutsalMatches}
@@ -476,18 +552,18 @@ const TournamentFinal = () => {
 
         {/* Voleybol Past Matches Section */}
         <SportSection 
-          title="VOLEYBOL - GEÇEN MAÇLAR" 
+          title="VOLEYBOL - YARI FİNAL SONUÇLARI" 
           icon={<FaVolleyballBall className="text-white text-lg sm:text-xl" />}
           sport="volleyball"
           completedMatches={pastVolleyballMatches}
         />
         
-        {/* Voleybol Future Matches Section */}
+        {/* Voleybol Final Matches Section */}
         <SportSection 
-          title="VOLEYBOL - FİNAL MAÇLARI" 
+          title="VOLEYBOL - FİNAL SONUÇLARI" 
           icon={<FaVolleyballBall className="text-white text-lg sm:text-xl" />}
           sport="volleyball"
-          upcomingMatches={upcomingVolleyballMatches}
+          completedMatches={finalVolleyballMatches}
         />
 
       </div>
@@ -495,4 +571,4 @@ const TournamentFinal = () => {
   );
 };
 
-export default TournamentFinal;
+export default TournamentFinal;              
