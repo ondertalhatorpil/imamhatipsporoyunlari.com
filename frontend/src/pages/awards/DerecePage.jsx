@@ -10,7 +10,7 @@ const sports = [
   { id: 'dart', title: 'Dart', icon: '🎯' },
   { id: 'wrestling', title: 'Bilek Güreşi', icon: '💪' },
   { id: 'gures', title: 'Güreş', icon: '🤼' },
-  { id: 'basketbol', title: 'Basketbol', icon: '🏀' },
+  { id: 'basketbol', title: '3x3 Basketbol', icon: '🏀' },
 ];
 
 const DerecePage = () => {
@@ -609,12 +609,12 @@ const getTaekwondoData = () => [
   { rank: "1", name: "", school: "KADIKÖY AHMET SANİ GEZİCİ KAİHL", category: "TAKIM GENÇ KIZ", isTeam: true, sport: "taekwondo" },
   { rank: "2", name: "", school: "ÇEKMEKÖY FATMA TALİP KAHRAMAN KAİHL", category: "TAKIM GENÇ KIZ", isTeam: true, sport: "taekwondo" },
   { rank: "3", name: "", school: "BEYKOZ BOĞAZİÇİ KAİHL", category: "TAKIM GENÇ KIZ", isTeam: true, sport: "taekwondo" },
-  { rank: "4", name: "", school: "TENZİLE ERDOĞAN KAİHL", category: "TAKIM GENÇ KIZ", isTeam: true, sport: "taekwondo" },
+  { rank: "3", name: "", school: "TENZİLE ERDOĞAN KAİHL", category: "TAKIM GENÇ KIZ", isTeam: true, sport: "taekwondo" },
   
   { rank: "1", name: "", school: "HÜRRİYET KAİHL", category: "TAKIM YILDIZ KIZ", isTeam: true, sport: "taekwondo" },
   { rank: "2", name: "", school: "BEYKOZ BOĞAZİÇİ KAİHL", category: "TAKIM YILDIZ KIZ", isTeam: true, sport: "taekwondo" },
   { rank: "3", name: "", school: "İTO BAŞAKŞEHİR AİHL", category: "TAKIM YILDIZ KIZ", isTeam: true, sport: "taekwondo" },
-  { rank: "4", name: "", school: "KAZIM KARABEKİR İHO", category: "TAKIM YILDIZ KIZ", isTeam: true, sport: "taekwondo" },
+  { rank: "3", name: "", school: "KAZIM KARABEKİR İHO", category: "TAKIM YILDIZ KIZ", isTeam: true, sport: "taekwondo" },
   
   { rank: "1", name: "", school: "SELAHADDİN EYYUBİ İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" },
   { rank: "2", name: "", school: "SULTANGAZİ YUNUS EMRE İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "taekwondo" },
