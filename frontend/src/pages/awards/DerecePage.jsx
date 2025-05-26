@@ -249,13 +249,11 @@ const DerecePage = () => {
     { rank: "1", name: "", school: "İSTANBUL RTE AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "wrestling" },
     { rank: "2", name: "", school: "BEYOĞLU AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "wrestling" },
     { rank: "3", name: "", school: "ÜSKÜDAR AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "wrestling" },
-    { rank: "4", name: "", school: "UFSM AİHL", category: "TAKIM GENÇ ERKEK", isTeam: true, sport: "wrestling" },
 
     // Yıldız Erkek Takım Tasnifi
     { rank: "1", name: "", school: "SULTANBEYLİ CAHİT ZARİFOĞLU İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "wrestling" },
     { rank: "2", name: "", school: "İSTANBUL RTE AİHL", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "wrestling" },
     { rank: "3", name: "", school: "ÇAMÇEŞME İHO", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "wrestling" },
-    { rank: "4", name: "", school: "ŞEHİT MEHMET GÜDER AİHL", category: "TAKIM YILDIZ ERKEK", isTeam: true, sport: "wrestling" }
   ];
   // Dart verileri
   const getDartData = () => [
