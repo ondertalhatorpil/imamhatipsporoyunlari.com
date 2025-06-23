@@ -69,7 +69,7 @@ const Gallery = () => {
         <div className="text-center mb-12">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-gray-800 mb-6 relative inline-block">
-            <span className="relative z-10">Fotoraf Albümü </span>
+            <span className="relative z-10">Fotoğraf albümü</span>
             <span className="absolute -bottom-2 left-0 right-0 h-3 bg-red-200 opacity-50 z-0"></span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-6">
